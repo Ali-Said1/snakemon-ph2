@@ -1,8 +1,12 @@
 # Tasks
 ## Ali
-- [ ] Cell (Grid)
+- [x] Cell (Grid)
+> No Further Edit Needed.
 - [ ] Grid (Grid)
+> Add Object to cell, need to understand logic.
 - [ ] Player (Player)
+> SetWallet validation uncertain.
+> If player reached cell > 99, cap it to 99 or skip?
 - [ ] Save Grid (Action)
 - [ ] Open Grid (Action)
 - [ ] New Game (Action)

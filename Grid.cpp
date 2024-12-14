@@ -61,7 +61,7 @@ void Grid::RemoveObjectFromCell(const CellPosition & pos)
 	if (pos.IsValidCell()) // Check if valid position
 	{
 		// Note: you can deallocate the object here before setting the pointer to null if it is needed
-
+		delete CellList[pos.VCell()][pos.HCell()]->GetGameObject(); // Deallocate the mrmoery reserved for the game object (Ladderm snake, card)
 		CellList[pos.VCell()][pos.HCell()]->SetGameObject(NULL);
 	}
 }
@@ -138,7 +138,7 @@ Ladder * Grid::GetNextLadder(const CellPosition & position)
 
 
 			///TODO: Check if CellList[i][j] has a ladder, if yes return it
-			
+			if (CellList[i][j]->HasLadder()) return dynamic_cast<Ladder *>(CellList[i][j]->GetGameObject()); // Cast the GameObject pointer to snake pointer to match return type
 
 		}
 		startH = 0; // because in the next above rows, we will search from the first left cell (hCell = 0) to the right
