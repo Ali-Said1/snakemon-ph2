@@ -100,7 +100,7 @@ ActionType Input::GetUserAction() const
 			case ITM_ADD_CARD:
 				return ADD_CARD;
 			case ITM_EXIT_DESIGN_MODE:
-				return EXIT_DESIGN;
+				return EXIT;
 			case ITM_SWITCH_TO_PLAY_MODE:
 				return TO_PLAY_MODE;
 
@@ -164,7 +164,7 @@ ActionType Input::GetUserAction() const
 			case ITM_SWITCH_TO_DESIGN_MODE:
 				return TO_DESIGN_MODE;
 			case ITM_EXIT_PLAY_MODE:
-				return EXIT_PLAY;
+				return EXIT;
 
 			default:
 				return EMPTY; // A click on empty place in toolbar

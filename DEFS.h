@@ -20,7 +20,7 @@ enum ActionType // The actions supported (add more as needed)
 	SAVE_GRID,
 	OPEN_GRID,
 	TO_PLAY_MODE, // Go to Play Mode
-	EXIT_DESIGN,
+	EXIT,
 
 	/// TODO: Add more action types of Design Mode
 
@@ -30,7 +30,6 @@ enum ActionType // The actions supported (add more as needed)
 	INPUT_DICE_VAL,
 	NEW_GAME,
 	TO_DESIGN_MODE, // Go to Design Mode
-	EXIT_PLAY,
 
 	/// TODO: Add more action types of Play Mode
 
