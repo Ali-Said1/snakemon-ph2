@@ -28,13 +28,15 @@
 - [ ] Snake (Game object)
 > Don't forget the isOverlapping function, might take a cell and check if the snake is overlapping with it
 - [ ] Add Snake (Action)
-- [ ] Card Class (Card)
+- [x] Card Class (Card)
+> Implemented by the best :)
 - [ ] Add Card (Action)
 - [ ] Copy Card (Action)
 - [ ] Cut Card (Action)
 - [ ] Paste Card (Action)
 - [ ] Edit Card (Action)
-- [ ] Card 1
+- [x] Card 1
+> Implemented by the best :)
 - [ ] Card 2
 - [ ] Card 8
 - [ ] Card 9
