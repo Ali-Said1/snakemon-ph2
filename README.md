@@ -15,16 +15,16 @@
 ## Seif Hesham
 - [ ] Ladder (Game object)
 > Don't forget the isOverlapping function, might take a cell and check if the ladder is overlapping with it
-- [ ] Add Ladder (Action)
+- [x] Add Ladder (Action)
 - [ ] Delete Game Object (Action)
 - [ ] To Play Mode (Action)
 - [ ] Roll Dice (Action)
 - [ ] Input Dice (Action)
-- [ ] Card 3
-- [ ] Card 4
-- [ ] Card 5
-- [ ] Card 6
-- [ ] Card 7
+- [x] Card 3
+- [x] Card 4
+- [x] Card 5
+- [x] Card 6
+- [x] Card 7
 ## Seif Atef
 - [ ] Snake (Game object)
 > Don't forget the isOverlapping function, might take a cell and check if the snake is overlapping with it
