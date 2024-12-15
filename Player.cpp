@@ -44,6 +44,11 @@ int Player::GetPlayerNumber() const
 {
 	return this->playerNum;
 }
+
+int Player::GetJustRolledDiceNumber() const {
+	return this->justRolledDiceNum;
+}
+
 // ====== Drawing Functions ======
 
 void Player::Draw(Output* pOut) const
@@ -74,7 +79,7 @@ void Player::Move(Grid * pGrid, int diceNumber)
 
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
-
+	this->justRolledDiceNum = diceNumber;
 	// 1- Increment the turnCount because calling Move() means that the player has rolled the dice once
 	this->turnCount++;
 	// 2- Check the turnCount to know if the wallet recharge turn comes (recharge wallet instead of move)
