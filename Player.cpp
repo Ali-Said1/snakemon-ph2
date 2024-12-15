@@ -101,7 +101,8 @@ void Player::Move(Grid * pGrid, int diceNumber)
 	//    the importance of this function is that it Updates the pCell pointer of the player and Draws it in the new position
 	pGrid->UpdatePlayerCell(this, newPos);
 	// 6- Apply() the game object of the reached cell (if any)
-	pCell->GetGameObject()->Apply(pGrid, this);
+	if (pCell->GetGameObject() != NULL)
+		pCell->GetGameObject()->Apply(pGrid, this);
 	// 7- Check if the player reached the end cell of the whole game, and if yes, Set end game with true: pGrid->SetEndGame(true)
 	if (newCellNum == 99) pGrid->SetEndGame(true);
 }
