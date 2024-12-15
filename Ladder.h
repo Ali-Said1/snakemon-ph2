@@ -18,6 +18,10 @@ public:
 
 	CellPosition GetEndPosition() const; // A getter for the endCellPos data member
 
+	//bool thisColumnHasLadder(const CellPosition& startPos, const CellPosition& endPos) const;   // test
+
+	//bool thisColumnHasSnake(const CellPosition& startPos, const CellPosition& endPos) const;    // test
+
 	virtual ~Ladder(); // Virtual destructor
 };
 

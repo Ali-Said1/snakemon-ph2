@@ -9,10 +9,6 @@ AddLadderAction::AddLadderAction(ApplicationManager *pApp) : Action(pApp)
 	// Initializes the pManager pointer of Action with the passed pointer
 }
 
-AddLadderAction::~AddLadderAction()
-{
-}
-
 void AddLadderAction::ReadActionParameters() 
 {	
 	// Get a Pointer to the Input / Output Interfaces
@@ -32,7 +28,36 @@ void AddLadderAction::ReadActionParameters()
 
 	///TODO: Make the needed validations on the read parameters
 
-	
+	//if (pGrid->GetCellFromCellPosition(startPos)->HasCard() != NULL)
+	//{
+	//	pGrid->PrintErrorMessage("Error: The starting cell cannot be a special type of cell (card cell). Click to continue ...");
+	//	startPos = CellPosition(-1, -1);
+	//	return;
+	//}
+
+	if (startPos.VCell() == 0)
+	{
+		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the first row! Click to continue ...");
+		startPos = CellPosition(-1, -1);
+		return;
+	}
+
+	if (startPos.HCell() != endPos.HCell()) {
+		pGrid->PrintErrorMessage("Error: The starting cell and the ending cell must be in the same column! Click to continue ...");
+		startPos = CellPosition(-1, -1);
+	}
+
+	else if (startPos.VCell() < endPos.VCell()) {
+
+		pGrid->PrintErrorMessage("Error: The ending cell must be after the starting cell! Click to continue ...");
+		startPos = CellPosition(-1, -1);
+	}
+
+	else if (startPos.HCell() == endPos.HCell() && startPos.VCell() == endPos.VCell())
+	{
+		pGrid->PrintErrorMessage("Error: The starting cell and the ending cell are identical! Click to continue ...");
+		startPos = CellPosition(-1, -1);
+	}
 
 	// Clear messages
 	pOut->ClearStatusBar();
@@ -62,4 +87,8 @@ void AddLadderAction::Execute()
 	}
 	// Here, the ladder is created and added to the GameObject of its Cell, so we finished executing the AddLadderAction
 
+}
+
+AddLadderAction::~AddLadderAction()
+{
 }
