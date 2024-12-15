@@ -30,7 +30,7 @@ void CardOne::ReadCardParameters(Grid * pGrid)
 	do {
 		pOut->PrintMessage("Input value to be decreased from passing player's wallets...");
 		walletAmount = pIn->GetInteger(pOut);
-	} while (walletAmount == -1);
+	} while (walletAmount <= 0);
 	// [ Note ]:
 	// In CardOne, the only parameter of CardOne is the "walletAmount" value to decrease from player
 	// Card parameters are the inputs you need to take from the user in the time of adding the Card in the grid

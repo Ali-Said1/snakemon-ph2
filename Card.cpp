@@ -36,6 +36,9 @@ void Card::Apply(Grid* pGrid, Player* pPlayer)
 	// "If a player reaches a card of any other type", the following message should be printed then wait mouse click
 
 	pGrid->PrintErrorMessage("You have reached card " + to_string(cardNumber) + ". Click to continue ...");
+	Input* pIn = pGrid->GetInput();
+	int x, y;
+	pIn->GetPointClicked(x, y);
 }
 
 Card::~Card()

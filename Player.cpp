@@ -40,6 +40,10 @@ int Player::GetTurnCount() const
 	return turnCount;
 }
 
+int Player::GetPlayerNumber() const
+{
+	return this->playerNum;
+}
 // ====== Drawing Functions ======
 
 void Player::Draw(Output* pOut) const
