@@ -2,11 +2,10 @@
 ## Ali
 - [x] Cell (Grid)
 > No Further Edit Needed.
-- [ ] Grid (Grid)
-> Add Object to cell, need to understand logic.
-- [ ] Player (Player)
-> SetWallet validation uncertain.
-> If player reached cell > 99, cap it to 99 or skip?
+- [x] Grid (Grid)
+> No Further Edit needed till now
+- [x] Player (Player)
+> No Further Edit needed
 - [ ] Save Grid (Action)
 - [ ] Open Grid (Action)
 - [ ] New Game (Action)
@@ -14,6 +13,7 @@
 - [ ] Card 10 - 13 (I think may be one card and inherit from it)
 ## Seif Hesham
 - [ ] Ladder (Game object)
+> Don't forget the isOverlapping function, might take a cell and check if the ladder is overlapping with it
 - [ ] Add Ladder (Action)
 - [ ] Delete Game Object (Action)
 - [ ] To Play Mode (Action)
@@ -26,6 +26,7 @@
 - [ ] Card 7
 ## Seif Atef
 - [ ] Snake (Game object)
+> Don't forget the isOverlapping function, might take a cell and check if the snake is overlapping with it
 - [ ] Add Snake (Action)
 - [ ] Card Class (Card)
 - [ ] Add Card (Action)
