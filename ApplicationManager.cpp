@@ -4,6 +4,7 @@
 #include "AddLadderAction.h"
 #include "AddCardAction.h"
 #include "RollDiceAction.h"
+#include "ToDesignModeAction.h"
 
 ///TODO: Add #include for all action types
 
@@ -78,7 +79,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case TO_DESIGN_MODE:
-		pOut->CreateDesignModeToolBar(); // temporary till you made its action class (CHANGE THIS LATTER)
+		pAct = new ToDesignModeAction(this); // temporary till you made its action class (CHANGE THIS LATTER)
 		break;
 
 		

@@ -9,7 +9,7 @@
 - [ ] Save Grid (Action)
 - [ ] Open Grid (Action)
 - [ ] New Game (Action)
-- [ ] To Design Mode (Action)
+- [x] To Design Mode (Action)
 - [ ] Card 10 - 13 (I think may be one card and inherit from it)
 ## Seif Hesham
 - [ ] Ladder (Game object)
