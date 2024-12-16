@@ -12,6 +12,7 @@ protected:
 	
 public:
 
+
 	GameObject(const CellPosition & pos); // Constructor for initializing data members
 	
 	CellPosition GetPosition() const;     // A Getter for position
@@ -24,6 +25,8 @@ public:
 	virtual void Apply(Grid* pGrid, Player* pPlayer) = 0;  // Applys the effect of the GameObject on the passed Player
 	                                                       // (The effect depends on the GameObject type, so virtual)
 	                                                       // For example, applying a ladder is by moving player up, and so on
+
+	virtual bool IsOverlapping( GameObject * newObj) const;
 
 	// The following functions are examples of what should be supported by the GameObject class
 	// They should be overridden by each inherited class

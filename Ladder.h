@@ -17,6 +17,7 @@ public:
 	virtual void Apply(Grid* pGrid, Player* pPlayer); // Applys the effect of the ladder by moving player to ladder's end cell
 
 	CellPosition GetEndPosition() const; // A getter for the endCellPos data member
+	bool Ladder::IsOverlapping(GameObject* newObj) const;
 
 	//bool thisColumnHasLadder(const CellPosition& startPos, const CellPosition& endPos) const;   // test
 

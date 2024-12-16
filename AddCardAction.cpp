@@ -22,14 +22,26 @@ void AddCardAction::ReadActionParameters()
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
 	// 1- Get a Pointer to the Input / Output Interfaces
-	
+	Output* pOut;
+	Input* pIn;
 	// 2- Read the "cardNumber" parameter and set its data member
-	
+	do
+	{
+		cardNumber = pIn->GetInteger(pOut);
+	} while (!( cardNumber >=1 && cardNumber <= 13) );
 	// 3- Read the "cardPosition" parameter (its cell position) and set its data member
-
+	int CellNumber;
+	do
+	{
+        cardPosition = pIn->GetInteger(pOut);
+		CellNumber = this->cardPosition.GetCellNumFromPosition(cardPosition);
+	
+	} while (!(CellNumber >= 1 && CellNumber <= 99));
+	
 	// 4- Make the needed validations on the read parameters
 
 	// 5- Clear status bar
+	pOut->ClearStatusBar();
 }
 
 void AddCardAction::Execute() 
@@ -42,7 +54,7 @@ void AddCardAction::Execute()
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
 	// 1- The first line of any Action Execution is to read its parameter first
-	
+	 this->ReadActionParameters();
 	// 2- Switch case on cardNumber data member and create the appropriate card object type
 	Card * pCard = NULL; // will point to the card object type
 	switch (cardNumber)
