@@ -64,21 +64,6 @@ bool Ladder::IsOverlapping(GameObject* newObj) const
 }
 
 
-//bool Ladder::thisColumnHasLadder(const CellPosition& startPos, const CellPosition& endPos) const {
-//	for (int i = startPos.VCell(); i > endPos.VCell(); i--) {
-//		if (dynamic_cast<Ladder*>(CellList[i][startPos.HCell()]->GetGameObject()) != NULL)
-//			return true;
-//	}
-//	return false;
-//}
-//
-//bool Ladder::thisColumnHasSnake(const CellPosition& startPos, const CellPosition& endPos) const {
-//	for (int i = startPos.VCell(); i < endPos.VCell(); i++) {
-//		if (dynamic_cast<Snake*>(CellList[i][startPos.HCell()]->GetGameObject()) != NULL)
-//			return true;
-//	}
-//	return false;
-//}
 
 Ladder::~Ladder()
 {

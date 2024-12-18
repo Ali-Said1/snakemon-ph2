@@ -11,10 +11,10 @@ public :
 	virtual void Draw(Output* pOut) const;
 	virtual void Apply(Grid* pGrid, Player* pPlayer);
 	CellPosition GetEndPosition() const;
-	CellPosition Ladder::GetEndPosition() const
-	{
-		return endCellPos;
-	}
+	//CellPosition Ladder::GetEndPosition() const
+	//{
+	//	return endCellPos;
+	//}
 
 	bool Snake::IsOverlapping(GameObject* newObj) const
 	{
