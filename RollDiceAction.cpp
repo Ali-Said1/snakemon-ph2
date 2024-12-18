@@ -38,8 +38,8 @@ void RollDiceAction::Execute()
 		Player* CurrentPlayer;
 		CurrentPlayer = pGrid->GetCurrentPlayer();   // remember to see if the player is prevented what will it do ?
 		pOut->PrintMessage("The Dice Value is " + to_string(diceNumber) + ", Click to continue...");
-		int Xpos, Ypos;
-		pIn->GetPointClicked(Xpos, Ypos);
+		int x, y;
+		pIn->GetPointClicked(x, y);
 		pOut->ClearStatusBar();
 
 		// 4- Move the currentPlayer using function Move of class player
