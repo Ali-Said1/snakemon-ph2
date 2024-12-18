@@ -11,12 +11,8 @@ public :
 	virtual void Draw(Output* pOut) const;
 	virtual void Apply(Grid* pGrid, Player* pPlayer);
 	CellPosition GetEndPosition() const;
-	CellPosition Ladder::GetEndPosition() const
-	{
-		return endCellPos;
-	}
 
-	bool Snake::IsOverlapping(GameObject* newObj) const
+	/*bool Snake::IsOverlapping(GameObject* newObj) const
 	{
 		if (this->GetPosition().HCell() != newObj->GetPosition().HCell()) return false;
 		Ladder* L1 = dynamic_cast<Ladder*>(newObj);
@@ -38,7 +34,7 @@ public :
 			}
 			return false;
 		}
-	}
+	}*/
 
 	virtual ~Snake();
 
