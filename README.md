@@ -36,7 +36,7 @@
 - [ ] Paste Card (Action)
 - [ ] Edit Card (Action)
 - [x] Card 1
-- [ ] Card 2
+- [x] Card 2
 - [x] Card 8
 - [x] Card 9
 
