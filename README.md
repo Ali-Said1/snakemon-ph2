@@ -19,7 +19,7 @@
 - [ ] Delete Game Object (Action)
 - [ ] To Play Mode (Action)
 - [x] Roll Dice (Action)
-- [ ] Input Dice (Action)
+- [x] Input Dice (Action)
 - [x] Card 3
 - [x] Card 4
 - [x] Card 5
