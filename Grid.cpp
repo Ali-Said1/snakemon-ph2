@@ -56,14 +56,19 @@ bool Grid::AddObjectToCell(GameObject * pNewObject)  // think if any validation 
 	return false; // if not a valid position
 }
 
-void Grid::RemoveObjectFromCell(const CellPosition & pos)
+bool Grid::RemoveObjectFromCell(const CellPosition & pos)
 {
 	if (pos.IsValidCell()) // Check if valid position
 	{
-		// Note: you can deallocate the object here before setting the pointer to null if it is needed
-		delete CellList[pos.VCell()][pos.HCell()]->GetGameObject(); // Deallocate the mrmoery reserved for the game object (Ladder, snake, card)
-		CellList[pos.VCell()][pos.HCell()]->SetGameObject(NULL);
+		if (CellList[pos.VCell()][pos.HCell()]->GetGameObject() != NULL) {
+			// Note: you can deallocate the object here before setting the pointer to null if it is needed
+			delete CellList[pos.VCell()][pos.HCell()]->GetGameObject(); // Deallocate the mrmoery reserved for the game object (Ladder, snake, card)
+			CellList[pos.VCell()][pos.HCell()]->SetGameObject(NULL);
+			return true;
+		}
+	
 	}
+	return false;
 }
 
 void Grid::UpdatePlayerCell(Player * player, const CellPosition & newPosition)
