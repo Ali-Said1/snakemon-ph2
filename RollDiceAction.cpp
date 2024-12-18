@@ -23,22 +23,33 @@ void RollDiceAction::Execute()
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
 	// 1- Check if the Game is ended (Use the GetEndGame() function of pGrid), if yes, make the appropriate action
-	
+	Grid* pGrid = pManager->GetGrid();
+	bool IsGameEnded = pGrid->GetEndGame();
+	Input* pIn = pGrid->GetInput();
+	Output* pOut = pGrid->GetOutput();
+
 	// -- If not ended, do the following --:
+	if (!IsGameEnded) {
+		// 2- Generate a random number from 1 to 6 --> This step is done for you
+		srand((int)time(NULL)); // time is for different seed each run
+		int diceNumber = 1 + rand() % 6; // from 1 to 6 --> should change seed
 
-	// 2- Generate a random number from 1 to 6 --> This step is done for you
-	srand((int)time(NULL)); // time is for different seed each run
-	int diceNumber = 1 + rand() % 6; // from 1 to 6 --> should change seed
+		// 3- Get the "current" player from pGrid
+		Player* CurrentPlayer;
+		CurrentPlayer = pGrid->GetCurrentPlayer();   // remember to see if the player is prevented what will it do ?
+		pOut->PrintMessage("The Dice Value is " + to_string(diceNumber) + ", Click to continue...");
+		int x, y;
+		pIn->GetPointClicked(x, y);
+		pOut->ClearStatusBar();
 
-	// 3- Get the "current" player from pGrid
+		// 4- Move the currentPlayer using function Move of class player
+		CurrentPlayer->Move(pGrid , diceNumber);
 
-	// 4- Move the currentPlayer using function Move of class player
+		// 5- Advance the current player number of pGrid
+		pGrid->AdvanceCurrentPlayer();
 
-	// 5- Advance the current player number of pGrid
-
-
-	// NOTE: the above guidelines are the main ones but not a complete set (You may need to add more steps).
-
+		// NOTE: the above guidelines are the main ones but not a complete set (You may need to add more steps).
+	}
 }
 
 RollDiceAction::~RollDiceAction()
