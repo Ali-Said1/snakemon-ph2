@@ -13,7 +13,7 @@
 - [ ] Card 10 - 13 (I think may be one card and inherit from it)
 > If a player deletes all Cards numbered 10, do we get the input again?
 ## Seif Hesham
-- [ ] Ladder (Game object)
+- [x] Ladder (Game object)
 > Don't forget the isOverlapping function, might take a cell and check if the ladder is overlapping with it
 - [x] Add Ladder (Action)
 - [x] Delete Game Object (Action)
