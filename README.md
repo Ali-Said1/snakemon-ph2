@@ -17,7 +17,7 @@
 > Don't forget the isOverlapping function, might take a cell and check if the ladder is overlapping with it
 - [x] Add Ladder (Action)
 - [x] Delete Game Object (Action)
-- [ ] To Play Mode (Action)
+- [x] To Play Mode (Action)
 - [x] Roll Dice (Action)
 - [x] Input Dice (Action)
 - [x] Card 3
