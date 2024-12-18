@@ -5,6 +5,12 @@
 //  Input         :: Value to be added to the passing players’ wallets.
 class CardTwo : public Card
 {
+	int AddedValue;
+public :
+	CardTwo(const CellPosition& Cell_Pos);
+	virtual void ReadCardParameters(Grid* pGrid);
+	virtual void Apply(Grid* pGrid, Player* pPlayer);
+	virtual ~CardTwo();
 
 
 };
