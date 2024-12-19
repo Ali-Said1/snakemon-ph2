@@ -30,7 +30,8 @@
 > Don't forget the isOverlapping function, might take a cell and check if the snake is overlapping with it (done grid val is missing)
 - [x] Add Snake (Action)
 - [x] Card Class (Card)
-- [ ] Add Card (Action)
+- [x] Add Card (Action)
+> Didn't get the validation on the read parameters
 - [ ] Copy Card (Action)
 - [ ] Cut Card (Action)
 - [ ] Paste Card (Action)
