@@ -26,8 +26,8 @@
 - [x] Card 6
 - [x] Card 7
 ## Seif Atef
-- [ ] Snake (Game object)
-> Don't forget the isOverlapping function, might take a cell and check if the snake is overlapping with it
+- [x] Snake (Game object)
+> Don't forget the isOverlapping function, might take a cell and check if the snake is overlapping with it (done grid val is missing)
 - [ ] Add Snake (Action)
 - [x] Card Class (Card)
 - [ ] Add Card (Action)
@@ -37,7 +37,7 @@
 - [ ] Edit Card (Action)
 - [x] Card 1
 - [x] Card 2
-- [x] Card 8
+- [x] Card 8 (needs editing)
 - [x] Card 9
 
 #### Don't Understand Implementation
