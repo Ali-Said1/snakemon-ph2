@@ -14,7 +14,7 @@ void InputDiceValAction::ReadActionParameters()
 	bool IsGameEnded = pGrid->GetEndGame();
 	if (!IsGameEnded)
 	{
-		pOut->PrintMessage("Enter a dice Value between 1-6 .");
+		pOut->PrintMessage("Please enter a dice value between 1-6 .");
 		int InputDiceValue;
 		InputDiceValue = pIn->GetInteger(pOut);
 		
@@ -25,8 +25,9 @@ void InputDiceValAction::ReadActionParameters()
 		else
 		{
 			InputDiceValue = -1;
+			DiceValue = InputDiceValue;
 			int x, y;
-			pOut->PrintMessage("The dice Value you entered is not bewtween 1-6 ,Click to continue...");
+			pGrid->PrintErrorMessage("Error: The dice Value you entered is not bewtween 1-6 ,Click to continue...");
 			pIn->GetPointClicked(x, y);
 			pOut->ClearStatusBar();
 		}
@@ -43,15 +44,18 @@ void InputDiceValAction::Execute()
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
 	bool IsGameEnded = pGrid->GetEndGame();
-	if (!IsGameEnded && DiceValue != 0)
+	if (DiceValue != -1) 
 	{
-		pOut->PrintMessage("The Dice Value you entered is " + to_string(DiceValue) + ", click to continue...");
-		int x, y;
-		pIn->GetPointClicked(x, y);
-		Player* currentPlayer = pGrid->GetCurrentPlayer();
-		currentPlayer->Move(pGrid, DiceValue);
-		pOut->ClearStatusBar();
-		pGrid->AdvanceCurrentPlayer();
+		if (!IsGameEnded && DiceValue != 0)
+		{
+			pOut->PrintMessage("The Dice Value you entered is " + to_string(DiceValue) + ", click to continue...");
+			int x, y;
+			pIn->GetPointClicked(x, y);
+			Player* currentPlayer = pGrid->GetCurrentPlayer();
+			currentPlayer->Move(pGrid, DiceValue);
+			pOut->ClearStatusBar();
+			pGrid->AdvanceCurrentPlayer();
+		}
 	}
 
 }

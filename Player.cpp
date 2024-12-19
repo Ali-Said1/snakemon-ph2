@@ -84,8 +84,7 @@ void Player::Move(Grid * pGrid, int diceNumber)
 	this->turnCount++;
 	// 2- Check the turnCount to know if the wallet recharge turn comes (recharge wallet instead of move)
 	//    If yes, recharge wallet and reset the turnCount and return from the function (do NOT move)
-	if (this->turnCount == 2) {
-		this->turnCount = 0;
+	if (this->turnCount%3 == 0) {
 		this->wallet += 10 * diceNumber;
 		return;
 	}
