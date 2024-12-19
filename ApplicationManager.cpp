@@ -5,6 +5,9 @@
 #include "AddCardAction.h"
 #include "RollDiceAction.h"
 #include "ToDesignModeAction.h"
+#include "InputDiceValAction.h"
+#include "DeleteGameObjectAction.h"
+
 
 ///TODO: Add #include for all action types
 
@@ -66,6 +69,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddCardAction(this);
 		break;
 
+	case DELETE_GAME_OBJ:
+		// create an object of AddCardAction here
+		pAct = new DeleteGameObjectAction(this);
+		break;
+
 	case EXIT:
 		break;
 
@@ -76,6 +84,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case ROLL_DICE:
 		// create an object of RollDiceAction here
 		pAct = new RollDiceAction(this);
+		break; 
+	case INPUT_DICE_VAL:
+		// create an object of RollDiceAction here
+		pAct = new InputDiceValAction(this);
 		break;
 
 	case TO_DESIGN_MODE:
