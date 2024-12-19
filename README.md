@@ -28,7 +28,7 @@
 ## Seif Atef
 - [x] Snake (Game object)
 > Don't forget the isOverlapping function, might take a cell and check if the snake is overlapping with it (done grid val is missing)
-- [ ] Add Snake (Action)
+- [x] Add Snake (Action)
 - [x] Card Class (Card)
 - [ ] Add Card (Action)
 - [ ] Copy Card (Action)
