@@ -1,12 +1,19 @@
 #include "ApplicationManager.h"
-
 #include "Grid.h"
 #include "AddLadderAction.h"
+#include "AddSnakeAction.h"
 #include "AddCardAction.h"
-#include "RollDiceAction.h"
-#include "ToDesignModeAction.h"
-#include "InputDiceValAction.h"
+#include "CopyCardAction.h"
+#include "CutCardAction.h"
+#include "PasteCardAction.h"
 #include "DeleteGameObjectAction.h"
+#include "SaveGridAction.h"
+#include "OpenGridAction.h"
+#include "ToPlayModeAction.h"
+#include "RollDiceAction.h"
+#include "InputDiceValAction.h"
+#include "NewGameAction.h"
+#include "ToDesignModeAction.h"
 
 
 ///TODO: Add #include for all action types
@@ -30,7 +37,7 @@ ApplicationManager::~ApplicationManager()
 //								Interface Management Functions						//
 //==================================================================================//
 
-Grid * ApplicationManager::GetGrid() const
+Grid* ApplicationManager::GetGrid() const
 {
 	return pGrid;
 }
@@ -53,7 +60,7 @@ ActionType ApplicationManager::GetUserAction() const
 ////////////////////////////////////////////////////////////////////////////////////
 
 // Creates an action and executes it
-void ApplicationManager::ExecuteAction(ActionType ActType) 
+void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
 
@@ -78,13 +85,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case TO_PLAY_MODE:
-		pOut->CreatePlayModeToolBar(); // temporary till you made its action class (CHANGE THIS LATTER)
+		pAct = new ToPlayModeAction(this);
 		break;
 
 	case ROLL_DICE:
 		// create an object of RollDiceAction here
 		pAct = new RollDiceAction(this);
-		break; 
+		break;
+
 	case INPUT_DICE_VAL:
 		// create an object of RollDiceAction here
 		pAct = new InputDiceValAction(this);
@@ -94,18 +102,44 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ToDesignModeAction(this); // temporary till you made its action class (CHANGE THIS LATTER)
 		break;
 
-		
+
 
 		///TODO: Add a case for EACH Action type in the Design mode or Play mode
 
+	//case ADD_SNAKE:
+	//	pAct = new AddSnakeAction(this);
+	//	break;
 
+	//case COPY_CARD:
+	//	pAct = new CopyCardAction(this);
+	//	break;
+
+	//case CUT_CARD:
+	//	pAct = new CutCardAction(this);
+	//	break;
+
+	//case PASTE_CARD:
+	//	pAct = new PasteCardAction(this);
+	//	break;
+
+	//case OPEN_GRID:
+	//	pAct = new OpenGridAction(this);
+	//	break;
+
+	//case SAVE_GRID:
+	//	pAct = new SaveGridAction(this);
+	//	break;
+
+	//case NEW_GAME:
+	//	pAct = new NewGameAction(this);
+	//	break;
 
 	case STATUS:	// a click on the status bar ==> no action
 		return;
 	}
 
 	// Execute the created action
-	if(pAct != NULL)
+	if (pAct != NULL)
 	{
 		pAct->Execute(); // Execute
 		delete pAct;	 // Action is not needed any more after executing ==> delete it

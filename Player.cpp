@@ -73,7 +73,8 @@ void Player::ClearDrawing(Output* pOut) const
 
 void Player::Move(Grid * pGrid, int diceNumber)
 {
-
+	Output* pOut = pGrid->GetOutput();
+	Input* pIn = pGrid->GetInput();
 	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below
 
 
@@ -85,6 +86,7 @@ void Player::Move(Grid * pGrid, int diceNumber)
 	// 2- Check the turnCount to know if the wallet recharge turn comes (recharge wallet instead of move)
 	//    If yes, recharge wallet and reset the turnCount and return from the function (do NOT move)
 	if (this->turnCount%3 == 0) {
+		pOut->PrintMessage("The Money of Player: " + to_string(playerNum) + " has been Increased By: " + to_string(diceNumber * 10));
 		this->wallet += 10 * diceNumber;
 		return;
 	}
@@ -103,7 +105,10 @@ void Player::Move(Grid * pGrid, int diceNumber)
 	if (pCell->GetGameObject() != NULL)
 		pCell->GetGameObject()->Apply(pGrid, this);
 	// 7- Check if the player reached the end cell of the whole game, and if yes, Set end game with true: pGrid->SetEndGame(true)
-	if (newCellNum == 99) pGrid->SetEndGame(true);
+	if (newCellNum == 99) {
+		pGrid->SetEndGame(true);
+		pGrid->PrintErrorMessage("The Game Has finished! Player : " + to_string(GetPlayerNumber()) + " Won!");
+	}
 }
 
 void Player::AppendPlayerInfo(string & playersInfo) const
