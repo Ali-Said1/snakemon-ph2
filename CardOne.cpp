@@ -1,5 +1,5 @@
 #include "CardOne.h"
-
+#include <fstream>
 #include "Player.h"
 
 CardOne::CardOne(const CellPosition & pos) : Card(pos) // set the cell position of the card
@@ -63,4 +63,9 @@ void CardOne::Apply(Grid* pGrid, Player* pPlayer)
 	// 2- Decrement the wallet of pPlayer by the walletAmount data member of CardOne
 	int currentWallet = pPlayer->GetWallet();
 	pPlayer->SetWallet(currentWallet - walletAmount);
+}
+
+void CardOne::save(ofstream& output) {
+	Card::save(output);
+	output << " " << walletAmount << endl;
 }

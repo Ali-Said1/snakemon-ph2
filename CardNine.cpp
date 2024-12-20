@@ -1,5 +1,5 @@
 #include "CardNine.h"
-
+#include <fstream>
 CardNine::CardNine(const CellPosition& Cell_Pos): Card(Cell_Pos)
 {
 	cardNumber = 9;
@@ -37,6 +37,12 @@ void CardNine::Apply(Grid* pGrid, Player* pPlayer)
 
 
 
+}
+
+void CardNine::save(ofstream& output)
+{
+	Card::save(output);
+	output << " " << StoppingCell.GetCellNumFromPosition(StoppingCell) << endl;
 }
 
 CardNine::~CardNine()

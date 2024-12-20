@@ -1,4 +1,5 @@
 #include "CardSeven.h"
+#include <fstream>
 
 
 CardSeven::CardSeven(const CellPosition& pos) : Card(pos) // set the cell position of the card
@@ -23,6 +24,12 @@ void CardSeven::Apply(Grid* pGrid, Player* pPlayer)
 	for (int i = 0; i < 3; i++) pGrid->AdvanceCurrentPlayer();
 
 	pGrid->PrintErrorMessage("Player " + to_string(player_num) + " Got an extra dice roll, Click to continue...");
+}
+
+void CardSeven::save(ofstream& output)
+{
+	Card::save(output);
+	output << endl;
 }
 
 

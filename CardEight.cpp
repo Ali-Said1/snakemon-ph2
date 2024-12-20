@@ -1,4 +1,6 @@
 #include "CardEight.h"
+#include <fstream>
+
 CardEight::CardEight(const CellPosition& Cell_Pos) : Card(Cell_Pos) {
 	cardNumber = 8; // set the inherited cardNumber data member with the card number (8 here)
 }
@@ -15,6 +17,12 @@ void CardEight::Apply(Grid* pGrid, Player* pPlayer)
 	//pGrid->PrintErrorMessage("This card prevents player " + to_string(pPlayer->GetPlayerNumber()) + " from rolling next turn. Click to continue...");
 	//already in the apply function.
 	pPlayer->Move( pGrid , 0 );
+}
+
+void CardEight::save(ofstream& output)
+{
+	Card::save(output);
+	output << endl;
 }
 
 CardEight::~CardEight()

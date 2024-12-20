@@ -18,6 +18,7 @@ public:
 	virtual bool UserInputValidation();
 	virtual void Apply(Grid* pGrid, Player* pPlayer); // Applies the effect of CardThree on the passed Player
 	// by moving the player to the next ladder and apply the ladder;
+	void save(ofstream& output);
 
 	virtual ~CardThree(); // A Virtual Destructor
 };

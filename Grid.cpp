@@ -5,6 +5,7 @@
 #include "Snake.h"
 #include "Card.h"
 #include "Player.h"
+#include <fstream>
 
 Grid::Grid(Input* pIn, Output* pOut) : pIn(pIn), pOut(pOut) // Initializing pIn, pOut
 {
@@ -58,7 +59,7 @@ bool Grid::AddObjectToCell(GameObject* pNewObject)  // think if any validation i
 
 bool Grid::IsOverlapping(GameObject* newObj) const
 {
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < NumVerticalCells; i++)
 	{
 		for (int j = 0; j < NumHorizontalCells; j++)
 		{
@@ -147,6 +148,67 @@ void Grid::AdvanceCurrentPlayer()
 	currPlayerNumber = (currPlayerNumber + 1) % MaxPlayerCount; // this generates value from 0 to MaxPlayerCount - 1
 }
 
+int Grid::GetNumberOfSnakes() const {
+	int SnakesCount = 0;
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+			if (CellList[i][j]->HasSnake())
+				SnakesCount++;
+	return SnakesCount;
+}
+
+int Grid::GetNumberOfLadders() const {
+	int LaddersCount = 0;
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+			if (CellList[i][j]->HasLadder())
+				LaddersCount++;
+	return LaddersCount;
+}
+
+int Grid::GetNumberOfCards() const {
+	int CardsCount = 0;
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+			if (CellList[i][j]->HasLadder())
+				CardsCount++;
+	return CardsCount;
+}
+
+void Grid::SaveSnakes(ofstream& outputfile)
+{
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+			if (CellList[i][j]->HasSnake())
+			{
+				Snake* s = dynamic_cast<Snake *>(CellList[i][j]->GetGameObject());
+				outputfile << s->GetPosition().GetCellNumFromPosition(s->GetPosition()) << " " << s->GetEndPosition().GetCellNumFromPosition(s->GetEndPosition()) << endl;
+			}
+				
+}
+
+void Grid::SaveLadders(ofstream& outputfile)
+{
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+			if (CellList[i][j]->HasLadder())
+			{
+				Ladder* L = dynamic_cast<Ladder*>(CellList[i][j]->GetGameObject());
+				outputfile << L->GetPosition().GetCellNumFromPosition(L->GetPosition()) << " " << L->GetEndPosition().GetCellNumFromPosition(L->GetEndPosition()) << endl;
+			}
+
+}
+
+void Grid::SaveCards(ofstream& outputfile)
+{
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+			if (CellList[i][j]->HasCard())
+			{
+				Card* L = dynamic_cast<Card*>(CellList[i][j]->GetGameObject());
+				L->save(outputfile);
+			}
+}
 // ========= Other Getters =========
 
 

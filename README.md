@@ -2,11 +2,11 @@
 ## Ali
 - [x] Cell (Grid)
 > No Further Edit Needed.
-- [x] Grid (Grid)
-> No Further Edit needed till now
+- [ ] Grid (Grid)
+> Get next snake not done
 - [x] Player (Player)
 > No Further Edit needed
-- [ ] Save Grid (Action)
+- [x] Save Grid (Action)
 - [ ] Open Grid (Action)
 - [ ] New Game (Action)
 - [x] To Design Mode (Action)

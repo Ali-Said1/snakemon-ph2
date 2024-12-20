@@ -1,4 +1,5 @@
 #include "Card.h"
+#include "fstream"
 
 
 Card::Card(const CellPosition& pos) : GameObject(pos) // sets the cell position of the GameObject
@@ -57,6 +58,10 @@ void Card::Apply(Grid* pGrid, Player* pPlayer)
 	Input* pIn = pGrid->GetInput();
 	int x, y;
 	pIn->GetPointClicked(x, y);
+}
+
+void Card::save(ofstream& output) {
+	output << this->GetCardNumber() << " " << this->GetPosition().GetCellNumFromPosition(this->GetPosition());
 }
 
 Card::~Card()

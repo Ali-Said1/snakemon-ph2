@@ -1,4 +1,5 @@
 #include "CardThirteen.h"
+#include <fstream>
 
 CardThirteen::CardThirteen(const CellPosition& pos) : MonopolyCards(pos) { cardNumber = 10; }
 CardThirteen::~CardThirteen() {}
@@ -41,4 +42,10 @@ void CardThirteen::Apply(Grid* pGrid, Player* pPlayer) {
 		pIn->GetPointClicked(x, y);
 		return;
 	}
+}
+
+void CardThirteen::save(ofstream& output)
+{
+	Card::save(output);
+	output << " " << price << " " << fees << endl;
 }

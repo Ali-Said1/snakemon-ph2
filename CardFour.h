@@ -19,6 +19,6 @@ public:
 
 	virtual void Apply(Grid* pGrid, Player* pPlayer); // Applies the effect of CardFour on the passed Player
 	// by moving the player to the next snake and apply the snake;
-
+	void save(ofstream& output);
 	virtual ~CardFour(); // A Virtual Destructor
 };

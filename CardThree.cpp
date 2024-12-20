@@ -1,4 +1,5 @@
 #include "CardThree.h"
+#include <fstream>
 
 CardThree::CardThree(const CellPosition& pos) : Card(pos) // set the cell position of the card
 {
@@ -31,6 +32,12 @@ void CardThree::Apply(Grid* pGrid, Player* pPlayer)
 		next_ladder->Apply(pGrid, pPlayer);
 	}
 }
+
+void CardThree::save(ofstream& output) {
+	Card::save(output);
+	output << endl;
+}
+
 
 CardThree::~CardThree()
 {

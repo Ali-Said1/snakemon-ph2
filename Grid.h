@@ -65,7 +65,12 @@ public:
     void AdvanceCurrentPlayer();     // Increments the currPlayerNum and if reaches MaxPlayerCount reset to 0 (using %)
 
     ///TODO: add any needed setter/getter "EXCEPT" ANY setters or getters of "CellList" or "PlayerList" (Forbidden for class Responsibilities)
-
+    int GetNumberOfSnakes() const;
+    int GetNumberOfLadders() const;
+    int GetNumberOfCards() const;
+    void SaveSnakes(ofstream &outputfile);
+    void SaveLadders(ofstream& outputfile);
+    void SaveCards(ofstream& outputfile);
     // ========= Other Getters =========
 
     Player* GetCurrentPlayer() const;// Gets a Pointer to the Current Player                                    

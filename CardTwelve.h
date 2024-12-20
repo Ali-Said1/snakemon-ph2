@@ -10,6 +10,7 @@ public:
 	CardTwelve(const CellPosition& pos);
 	void ReadCardParameters(Grid* pGrid);
 	void Apply(Grid* pGrid, Player* pPlayer);
+	void save(ofstream& output);
 	~CardTwelve();
 };
 

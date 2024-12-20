@@ -1,4 +1,5 @@
 #include "CardSix.h"
+#include <fstream>
 
 CardSix::CardSix(const CellPosition& pos) : Card(pos) {
 	cardNumber = 6; // set the inherited cardNumber data member with the card number (6 here)
@@ -7,6 +8,12 @@ CardSix::CardSix(const CellPosition& pos) : Card(pos) {
 void CardSix::Apply(Grid* pGrid, Player* pPlayer) {
 	Card::Apply(pGrid, pPlayer);
 	pPlayer->Move(pGrid, -pPlayer->GetJustRolledDiceNumber());
+}
+
+void CardSix::save(ofstream& output)
+{
+	Card::save(output);
+	output << endl;
 }
 
 CardSix:: ~CardSix() {}

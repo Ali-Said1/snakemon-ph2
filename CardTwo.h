@@ -11,6 +11,7 @@ public :
 	virtual void ReadCardParameters(Grid* pGrid);
 	virtual bool UserInputValidation();
 	virtual void Apply(Grid* pGrid, Player* pPlayer);
+	void save(ofstream& output);
 	virtual ~CardTwo();
 
 

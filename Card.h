@@ -29,6 +29,7 @@ public:
 
     virtual void EditParameters(Grid* pGrid, Input* pIn, Output* pOut);
 
+    virtual void save(ofstream& output);
 
     virtual void Apply(Grid* pGrid, Player* pPlayer);  // It applies the effect of the Card Type on the passed player
     // It is a virtual function (implementation depends on Card Type)

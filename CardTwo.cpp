@@ -1,5 +1,5 @@
 #include "CardTwo.h"
-
+#include <fstream>
 CardTwo::CardTwo(const CellPosition& Cell_Pos): Card(Cell_Pos)
 {
 	cardNumber = 2;
@@ -32,8 +32,13 @@ void CardTwo::Apply(Grid* pGrid, Player* pPlayer)
 {
 
 		Card::Apply(pGrid, pPlayer);
-		int newVal = pPlayer->GetWallet() - AddedValue;
+		int newVal = pPlayer->GetWallet() + AddedValue;
 		pPlayer->SetWallet(newVal);
+}
+
+void CardTwo::save(ofstream& output) {
+	Card::save(output);
+	output << " " << AddedValue << endl;
 }
 
 CardTwo::~CardTwo()

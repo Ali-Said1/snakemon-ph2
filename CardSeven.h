@@ -18,6 +18,7 @@ public:
 
 	virtual void Apply(Grid*, Player*); //Applies the effect of CardThree on passed player
 	//by giving passed player another dice roll  
+	void save(ofstream& output);
 
 	virtual ~CardSeven(); // A Virtual Destructor
 };

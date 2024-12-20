@@ -10,6 +10,7 @@ public :
 	CardNine(const CellPosition& Cell_Pos);
 	virtual void ReadCardParameters(Grid* pGrid);
 	virtual void Apply(Grid* pGrid, Player* pPlayer);
+	void save(ofstream& output);
 	virtual ~CardNine();
 };
 

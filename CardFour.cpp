@@ -1,5 +1,5 @@
 #include "CardFour.h"
-
+#include <fstream>
 CardFour::CardFour(const CellPosition& pos) : Card(pos) // set the cell position of the card
 {
 	cardNumber = 4; // set the inherited cardNumber data member with the card number (4 here)
@@ -26,6 +26,10 @@ void CardFour::Apply(Grid* pGrid, Player* pPlayer)
 	//}
 }
 
+void CardFour::save(ofstream& output) {
+	Card::save(output);
+	output << endl;
+}
 CardFour::~CardFour()
 {
 }

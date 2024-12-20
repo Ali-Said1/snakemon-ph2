@@ -1,5 +1,5 @@
 #include "CardEleven.h"
-
+#include <fstream>
 CardEleven::CardEleven(const CellPosition& pos) : MonopolyCards(pos) { cardNumber = 10; }
 CardEleven::~CardEleven() {}
 
@@ -41,4 +41,9 @@ void CardEleven::Apply(Grid* pGrid, Player* pPlayer) {
 		pIn->GetPointClicked(x, y);
 		return;
 	}
+}
+
+void CardEleven::save(ofstream& output) {
+	Card::save(output);
+	output << " " << price << " " << fees << endl;
 }
