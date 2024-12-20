@@ -25,7 +25,7 @@ public:
     
     virtual bool UserInputValidation();
 
-    virtual bool TakesParameters() const ;
+    virtual bool TakesParameters() const;
 
     virtual void EditParameters(Grid* pGrid, Input* pIn, Output* pOut);
 

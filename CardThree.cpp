@@ -10,6 +10,11 @@ void CardThree::ReadCardParameters(Grid* pGrid)
 
 }
 
+bool CardThree::UserInputValidation()
+{
+	return true;
+}
+
 void CardThree::Apply(Grid* pGrid, Player* pPlayer)
 {
 	Card::Apply(pGrid, pPlayer);

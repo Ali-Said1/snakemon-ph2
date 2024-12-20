@@ -32,7 +32,7 @@ void Card::ReadCardParameters(Grid* pGrid)
 
 bool Card::UserInputValidation()
 {
-	return 1;
+	return true;
 }
 
 bool Card::TakesParameters() const

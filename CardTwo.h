@@ -9,6 +9,7 @@ class CardTwo : public Card
 public :
 	CardTwo(const CellPosition& Cell_Pos);
 	virtual void ReadCardParameters(Grid* pGrid);
+	virtual bool UserInputValidation();
 	virtual void Apply(Grid* pGrid, Player* pPlayer);
 	virtual ~CardTwo();
 
