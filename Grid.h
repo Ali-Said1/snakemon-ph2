@@ -41,7 +41,7 @@ public:
     bool AddObjectToCell(GameObject* pNewObject); // Adds a GameObject to the Cell of its "position" data member
     // only if the Cell does NOT already contain an object, 
     // otherwise return false and don't add
-
+    bool IsOverlapping(GameObject* newObj) const;
     bool RemoveObjectFromCell(const CellPosition& pos); // Removes the GameObject of the Cell of the passed "position"
 
     Card* GetCardFromPosition(const CellPosition& pos); // Declaration

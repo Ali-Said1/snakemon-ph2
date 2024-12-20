@@ -48,7 +48,7 @@ bool Grid::AddObjectToCell(GameObject* pNewObject)  // think if any validation i
 		GameObject* pPrevObject = CellList[pos.VCell()][pos.HCell()]->GetGameObject();
 		if (pPrevObject)  // the cell already contains a game object
 			return false; // do NOT add and return false
-
+		if (pNewObject->IsOverlapping(pNewObject)) return false;
 		// Set the game object of the Cell with the new game object
 		CellList[pos.VCell()][pos.HCell()]->SetGameObject(pNewObject);
 		return true; // indicating that addition is done
@@ -56,6 +56,23 @@ bool Grid::AddObjectToCell(GameObject* pNewObject)  // think if any validation i
 	return false; // if not a valid position
 }
 
+bool Grid::IsOverlapping(GameObject* newObj) const
+{
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < NumHorizontalCells; j++)
+		{
+			if (CellList[i][j]->HasLadder() || CellList[i][j]->HasSnake())
+			{ // loops on all the cells and checks the overlapping member function of cells
+				if (newObj->IsOverlapping(CellList[i][j]->GetGameObject()))
+				{ // with snake or ladder
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
 bool Grid::RemoveObjectFromCell(const CellPosition& pos)
 {
 	if (pos.IsValidCell()) // Check if valid position
