@@ -21,8 +21,8 @@ public:
 	                                                  // by decrementing the player's wallet by the walletAmount data member
 	virtual bool UserInputValidation();
 
-	void save(ofstream& output);
-
+	virtual void save(ofstream& output);
+	virtual void load(ifstream& input);
 	virtual ~CardOne(); // A Virtual Destructor
 };
 

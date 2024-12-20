@@ -69,3 +69,10 @@ void CardOne::save(ofstream& output) {
 	Card::save(output);
 	output << " " << walletAmount << endl;
 }
+
+void CardOne::load(ifstream& input)
+{
+	int wallet;
+	input >> wallet;
+	this->walletAmount = wallet;
+}

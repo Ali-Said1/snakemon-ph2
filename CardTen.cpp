@@ -47,3 +47,11 @@ void CardTen::save(ofstream& output) {
 	Card::save(output);
 	output << " " << price << " " << fees << endl;
 }
+
+void CardTen::load(ifstream& input)
+{
+	int p, f;
+	input >> p >> f;
+	this->price = p;
+	this->fees = f;
+}

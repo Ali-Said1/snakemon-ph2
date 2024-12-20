@@ -27,12 +27,15 @@ void SaveGridAction::Execute() {
 		int x, y;
 		pIn->GetPointClicked(x, y);
 		pOut->ClearStatusBar();
+		return;
 	}
 	Grid* pGrid = pManager->GetGrid();
 	outputFile <<  pGrid->GetNumberOfSnakes() << endl;
 	pGrid->SaveSnakes(outputFile);
 	outputFile << pGrid->GetNumberOfLadders() << endl;
+	pGrid->SaveLadders(outputFile);
 	int numberOfCards = pGrid->GetNumberOfCards();
+	outputFile << numberOfCards << endl;
 	pGrid->SaveCards(outputFile);
 
 	outputFile.close();

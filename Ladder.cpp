@@ -45,10 +45,12 @@ bool Ladder::IsOverlapping(GameObject* newObj) const
 	Ladder* L1 = dynamic_cast<Ladder*>(newObj);
 	if (L1)
 	{
-		if ( (this->GetPosition().VCell() <= newObj->GetPosition().VCell() && this->GetPosition().VCell() >= L1->GetEndPosition().VCell() ) || (this->GetEndPosition().VCell() <= newObj->GetPosition().VCell() && this->GetEndPosition().VCell() >= L1->GetEndPosition().VCell()) )
+		if ( (this->GetPosition().VCell() <= L1->GetPosition().VCell() && this->GetPosition().VCell() >= L1->GetEndPosition().VCell() ) || (this->GetEndPosition().VCell() <= L1->GetPosition().VCell() && this->GetEndPosition().VCell() >= L1->GetEndPosition().VCell()))
 		{
-
-			return true ;
+			return true;
+		}
+		else if ((L1->GetPosition().VCell() <= this->GetPosition().VCell() && L1->GetPosition().VCell() >= this->GetEndPosition().VCell()) || (L1->GetEndPosition().VCell() <= this->GetPosition().VCell() && L1->GetEndPosition().VCell() >= this->GetEndPosition().VCell())) {
+			return true;
 		}
 		return false;
 	}

@@ -20,9 +20,9 @@ void AddSnakeAction::ReadActionParameters()
 	End_Pos = pIn->GetCellClicked();
 	
 	
-	if (Start_Pos.VCell() == 0 )
+	if (Start_Pos.VCell() == 8 )
 	{
-		pGrid->PrintErrorMessage("Err:: The starting cell cannot be in the last row! Click to continue ...");
+		pGrid->PrintErrorMessage("Err:: The starting cell cannot be in the first row! Click to continue ...");
 		Start_Pos = CellPosition(-1, -1);
 
 	}
@@ -62,7 +62,7 @@ void AddSnakeAction::Execute()
 	if (!Check_Addition)
 	{
 	
-		pGrid->PrintErrorMessage("Error: Cell already has an object ! Click to continue ...");
+		pGrid->PrintErrorMessage("Error: Cell already has an object or Snake at current position is overlapping with another object! Click to continue ...");
 		Input* pIn = pGrid->GetInput();
 		int x, y;
 		pIn->GetPointClicked(x ,y);

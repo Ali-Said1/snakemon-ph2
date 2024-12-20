@@ -126,13 +126,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new EditCardAction(this);
 		break;
 
-		//case OPEN_GRID:
-		//	pAct = new OpenGridAction(this);
-		//	break;
+	case OPEN_GRID:
+		pAct = new OpenGridAction(this);
+		break;
 
-		//case SAVE_GRID:
-		//	pAct = new SaveGridAction(this);
-		//	break;
+	case SAVE_GRID:
+		pAct = new SaveGridAction(this);
+		break;
 
 		//case NEW_GAME:
 		//	pAct = new NewGameAction(this);

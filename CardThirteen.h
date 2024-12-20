@@ -10,7 +10,8 @@ public:
 	CardThirteen(const CellPosition& pos);
 	void ReadCardParameters(Grid* pGrid);
 	void Apply(Grid* pGrid, Player* pPlayer);
-	void save(ofstream& output);
+	virtual void save(ofstream& output);
+	virtual void load(ifstream& input);
 	~CardThirteen();
 };
 

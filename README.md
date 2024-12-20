@@ -3,11 +3,11 @@
 - [x] Cell (Grid)
 > No Further Edit Needed.
 - [ ] Grid (Grid)
-> Get next snake not done
+> Get next snake not done, Validate no card is put at cell 1
 - [x] Player (Player)
 > No Further Edit needed
 - [x] Save Grid (Action)
-- [ ] Open Grid (Action)
+- [x] Open Grid (Action)
 - [ ] New Game (Action)
 - [x] To Design Mode (Action)
 - [x] Card 10 - 13 (I think may be one card and inherit from it)

@@ -37,12 +37,12 @@ void AddCardAction::ReadActionParameters()
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
 	// 2- Read the "cardNumber" parameter and set its data member
-	pOut->PrintMessage("Please Enter a card number between 1-12 .");
+	pOut->PrintMessage("Please Enter a card number between 1-13 .");
 	cardNumber = pIn->GetInteger(pOut);
 
 	// 3- Read the "cardPosition" parameter (its cell position) and set its data member
 	// 4- Make the needed validations on the read parameters
-	if (cardNumber > 0 && cardNumber < 13)
+	if (cardNumber > 0 && cardNumber < 14)
 	{
 
 		pOut->PrintMessage("Please choose a cell to insert the card");
@@ -111,27 +111,28 @@ void AddCardAction::Execute()
 		case 9:
 			pCard = new CardNine(cardPosition);
 			break;
-			//case 10:
-			//	pCard = new CardTen(cardPosition);
-			//	break;
-			//case 11:
-			//	pCard = new CardEleven(cardPosition);
-			//	break;
-			//case 12:
-			//	pCard = new CardTwelve(cardPosition);
-			//	break;
-			//case 13:
-			//	pCard = new CardThirteen(cardPosition);
+		case 10:
+			pCard = new CardTen(cardPosition);
+			break;
+		case 11:
+			pCard = new CardEleven(cardPosition);
+			break;
+		case 12:
+			pCard = new CardTwelve(cardPosition);
+			break;
+		case 13:
+			pCard = new CardThirteen(cardPosition);
 			//	// A- Add the remaining cases
 		}
+		
 	}
 
 	// A- We get a pointer to the Grid from the ApplicationManager
 	Grid* pGrid = pManager->GetGrid();
-
 	// B- Make the "pCard" reads its card parameters: ReadCardParameters(), It is virtual and depends on the card type
 	pCard->ReadCardParameters(pGrid);
-
+	Output* pOut = pGrid->GetOutput();
+	pOut->ClearStatusBar();
 	// 3- if pCard is correctly set in the switch case (i.e. if pCard is pointing to an object -- NOT NULL)
 	if (!(pCard->UserInputValidation()))
 	{
@@ -149,6 +150,8 @@ void AddCardAction::Execute()
 			pGrid->PrintErrorMessage("Error: This cell is already used for another object! click to continue...");
 		}
 	}
+
+	pCard->Draw(pOut);
 
 	// Here, the card is created and added to the GameObject of its Cell, so we finished executing the AddCardAction
 

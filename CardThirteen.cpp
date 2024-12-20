@@ -1,7 +1,7 @@
 #include "CardThirteen.h"
 #include <fstream>
 
-CardThirteen::CardThirteen(const CellPosition& pos) : MonopolyCards(pos) { cardNumber = 10; }
+CardThirteen::CardThirteen(const CellPosition& pos) : MonopolyCards(pos) { cardNumber = 13; }
 CardThirteen::~CardThirteen() {}
 
 int CardThirteen::fees = 0;
@@ -48,4 +48,12 @@ void CardThirteen::save(ofstream& output)
 {
 	Card::save(output);
 	output << " " << price << " " << fees << endl;
+}
+
+void CardThirteen::load(ifstream& input)
+{
+	int p, f;
+	input >> p >> f;
+	this->price = p;
+	this->fees = f;
 }

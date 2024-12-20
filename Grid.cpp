@@ -49,7 +49,8 @@ bool Grid::AddObjectToCell(GameObject* pNewObject)  // think if any validation i
 		GameObject* pPrevObject = CellList[pos.VCell()][pos.HCell()]->GetGameObject();
 		if (pPrevObject)  // the cell already contains a game object
 			return false; // do NOT add and return false
-		if (pNewObject->IsOverlapping(pNewObject)) return false;
+		if (!dynamic_cast<Card *>(pNewObject))
+			if (Grid::IsOverlapping(pNewObject)) return false;
 		// Set the game object of the Cell with the new game object
 		CellList[pos.VCell()][pos.HCell()]->SetGameObject(pNewObject);
 		return true; // indicating that addition is done
@@ -87,6 +88,13 @@ bool Grid::RemoveObjectFromCell(const CellPosition& pos)
 
 	}
 	return false;
+}
+
+void Grid::Clear()
+{
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+			RemoveObjectFromCell(CellList[i][j]->GetCellPosition());
 }
 
 Card* Grid::GetCardFromPosition(const CellPosition& pos)

@@ -64,6 +64,10 @@ void Card::save(ofstream& output) {
 	output << this->GetCardNumber() << " " << this->GetPosition().GetCellNumFromPosition(this->GetPosition());
 }
 
+void Card::load(ifstream& input)
+{
+}
+
 Card::~Card()
 {
 }

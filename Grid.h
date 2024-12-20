@@ -43,7 +43,7 @@ public:
     // otherwise return false and don't add
     bool IsOverlapping(GameObject* newObj) const;
     bool RemoveObjectFromCell(const CellPosition& pos); // Removes the GameObject of the Cell of the passed "position"
-
+    void Clear();
     Card* GetCardFromPosition(const CellPosition& pos); // Declaration
 
 

@@ -45,6 +45,13 @@ void CardNine::save(ofstream& output)
 	output << " " << StoppingCell.GetCellNumFromPosition(StoppingCell) << endl;
 }
 
+void CardNine::load(ifstream& input)
+{
+	int cellNum;
+	input >> cellNum;
+	this->StoppingCell = CellPosition::GetCellPositionFromNum(cellNum);
+}
+
 CardNine::~CardNine()
 {
 }

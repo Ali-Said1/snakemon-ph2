@@ -3,6 +3,7 @@
 CardTwo::CardTwo(const CellPosition& Cell_Pos): Card(Cell_Pos)
 {
 	cardNumber = 2;
+	AddedValue = -1;
 }
 
 void CardTwo::ReadCardParameters(Grid* pGrid)
@@ -39,6 +40,13 @@ void CardTwo::Apply(Grid* pGrid, Player* pPlayer)
 void CardTwo::save(ofstream& output) {
 	Card::save(output);
 	output << " " << AddedValue << endl;
+}
+
+void CardTwo::load(ifstream& input)
+{
+	int val;
+	input >> val;
+	this->AddedValue = val;
 }
 
 CardTwo::~CardTwo()
