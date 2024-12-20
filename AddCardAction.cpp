@@ -133,6 +133,11 @@ void AddCardAction::Execute()
 		Grid* pGrid = pManager->GetGrid();
 		// B- Make the "pCard" reads its card parameters: ReadCardParameters(), It is virtual and depends on the card type
 		pCard->ReadCardParameters(pGrid);
+		if (!(pCard->UserInputValidation()))
+		{
+			delete pCard;
+			pCard = NULL;
+		}
 		// C- Add the card object to the GameObject of its Cell:
 		bool AdditionValidity = pGrid->AddObjectToCell(pCard);
 		// D- if the GameObject cannot be added in the Cell, Print the appropriate error message on statusbar

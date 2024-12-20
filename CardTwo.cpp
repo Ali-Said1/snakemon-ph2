@@ -10,8 +10,9 @@ void CardTwo::ReadCardParameters(Grid* pGrid)
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
 
-	pOut->PrintMessage( "Enter the value to be incremented" );
+	pOut->PrintMessage("Enter the value to be incremented");
 	AddedValue = pIn->GetInteger(pOut);
+	pOut->ClearStatusBar();
 	if (AddedValue < 0)
 	{
 		int x, y;
@@ -19,15 +20,20 @@ void CardTwo::ReadCardParameters(Grid* pGrid)
 		pIn->GetPointClicked(x, y);
 		pOut->ClearStatusBar();
 	}
+}
 
+bool CardTwo::UserInputValidation()
+{
+	if (AddedValue >= 0) return true;
+	return false;
 }
 
 void CardTwo::Apply(Grid* pGrid, Player* pPlayer)
 {
-	Card::Apply(pGrid, pPlayer);
-	int newVal = pPlayer->GetWallet() - AddedValue;
-	pPlayer->SetWallet(newVal);
 
+		Card::Apply(pGrid, pPlayer);
+		int newVal = pPlayer->GetWallet() - AddedValue;
+		pPlayer->SetWallet(newVal);
 }
 
 CardTwo::~CardTwo()

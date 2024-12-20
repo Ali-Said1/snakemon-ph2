@@ -22,7 +22,10 @@ public:
 
     virtual void ReadCardParameters(Grid* pGrid); // It reads the parameters specific for each Card Type
     // It is a virtual function (implementation depends on Card Type)
-    virtual bool TakesParameters() const;
+    
+    virtual bool UserInputValidation();
+
+    virtual bool TakesParameters() const ;
 
     virtual void EditParameters(Grid* pGrid, Input* pIn, Output* pOut);
 

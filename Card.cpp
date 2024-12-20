@@ -30,6 +30,11 @@ void Card::ReadCardParameters(Grid* pGrid)
 	// and if we make it pure virtual, that will make those Cards abstract classes
 }
 
+bool Card::UserInputValidation()
+{
+	return 1;
+}
+
 bool Card::TakesParameters() const
 {
 	// Default implementation: Cards that don't take parameters return false
