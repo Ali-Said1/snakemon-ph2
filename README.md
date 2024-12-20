@@ -32,10 +32,10 @@
 - [x] Card Class (Card)
 - [x] Add Card (Action)
 > Didn't get the validation on the read parameters
-- [ ] Copy Card (Action)
-- [ ] Cut Card (Action)
-- [ ] Paste Card (Action)
-- [ ] Edit Card (Action)
+- [x] Copy Card (Action)
+- [x] Cut Card (Action)
+- [x] Paste Card (Action)
+- [x] Edit Card (Action)
 - [x] Card 1
 - [x] Card 2
 - [x] Card 8 (needs editing)
