@@ -86,8 +86,9 @@ void Player::Move(Grid * pGrid, int diceNumber)
 	// 2- Check the turnCount to know if the wallet recharge turn comes (recharge wallet instead of move)
 	//    If yes, recharge wallet and reset the turnCount and return from the function (do NOT move)
 	if (this->turnCount%3 == 0) {
-		pOut->PrintMessage("The Money of Player: " + to_string(playerNum) + " has been Increased By: " + to_string(diceNumber * 10));
+		pGrid->PrintErrorMessage("It's Time to recharge the wallet for Player " + to_string(GetPlayerNumber()) + " . Click to continue...");
 		this->wallet += 10 * diceNumber;
+		pOut->PrintMessage("The Money of Player: " + to_string(playerNum) + " has been Increased By: " + to_string(diceNumber * 10));
 		return;
 	}
 	// 3- Set the justRolledDiceNum with the passed diceNumber
