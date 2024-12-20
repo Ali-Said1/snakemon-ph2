@@ -34,23 +34,36 @@ void AddCardAction::ReadActionParameters()
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
 	// 1- Get a Pointer to the Input / Output Interfaces
-	Output* pOut{};
-	Input* pIn{};
+	Grid* pGrid = pManager->GetGrid();
+	Output* pOut = pGrid->GetOutput();
+	Input* pIn = pGrid->GetInput();
 	// 2- Read the "cardNumber" parameter and set its data member
-	do
-	{
-		cardNumber = pIn->GetInteger(pOut);
-	} while (!( cardNumber >=1 && cardNumber <= 13) );
+	pOut->PrintMessage("Please Enter a card number between 1-12 ");
+	cardNumber = pIn->GetInteger(pOut);
+
 	// 3- Read the "cardPosition" parameter (its cell position) and set its data member
-	int CellNumber;
-	do
-	{
-        cardPosition = pIn->GetInteger(pOut);
-		CellNumber = this->cardPosition.GetCellNumFromPosition(cardPosition);
-	
-	} while (!(CellNumber >= 1 && CellNumber <= 99));
-	
 	// 4- Make the needed validations on the read parameters
+	if (cardNumber > 0 && cardNumber < 13)
+	{
+
+		pOut->PrintMessage("Please choose a cell to insert the card");
+		CellPosition position;
+		position = pIn->GetCellClicked();
+		bool IsItValid = position.IsValidCell();
+		if (!IsItValid) {
+			pOut->PrintMessage("Your Click Position is invalid, click to continue..");
+			int x, y;
+			pIn->GetPointClicked(x, y);
+		}
+		else cardPosition = position; 
+	}
+	else {
+		cardNumber = -1;
+		pOut->PrintMessage("You Have entered an invalid card number, Click to continue..");
+		int x, y;
+		pIn->GetPointClicked(x, y);
+	}
+	
 	
 	// 5- Clear status bar
 	pOut->ClearStatusBar();
@@ -125,7 +138,7 @@ void AddCardAction::Execute()
 		// D- if the GameObject cannot be added in the Cell, Print the appropriate error message on statusbar
 		if (!AdditionValidity)
 		{
-			pGrid->PrintErrorMessage("Err...This cell is already used for another object! click to continue...");
+			pGrid->PrintErrorMessage("Error: This cell is already used for another object! click to continue...");
 		}
 	}
 

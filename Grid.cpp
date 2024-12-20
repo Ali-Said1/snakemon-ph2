@@ -157,7 +157,7 @@ Ladder* Grid::GetNextLadder(const CellPosition& position)
 	return NULL; // not found
 }
 
-
+/*
 Snake* Grid::GetNextSnake(const CellPosition& position)
 {
 
@@ -176,7 +176,7 @@ Snake* Grid::GetNextSnake(const CellPosition& position)
 	}
 	return NULL; // not found
 }
-
+*/
 
 // ========= User Interface Functions =========
 

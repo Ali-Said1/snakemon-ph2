@@ -10,7 +10,7 @@ Snake::Snake(const CellPosition& startCellPos1, const CellPosition& endCellPos1)
 
 void Snake::Draw(Output* pOut) const
 {
-	pOut->DrawLadder(position, endCellPos);
+	pOut->DrawSnake(position, endCellPos);
     //still val
 }
 
