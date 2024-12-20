@@ -9,18 +9,18 @@ Player* CardTen::pPlayer = NULL;
 
 void CardTen::ReadCardParameters(Grid* pGrid) {
 	if (price != 0 && fees != 0) return;
-	price = ReadCardPrice(pGrid);
+	price = ReadCardPrice(pGrid); // Call the functions of the parent class (MonopolyCards)
 	fees = ReadCardFees(pGrid);
 }
 
 void CardTen::Apply(Grid* pGrid, Player* pPlayer) {
-	Card::Apply(pGrid, pPlayer);
+	Card::Apply(pGrid, pPlayer);  // Output the default message
 	Input* pIn = pGrid->GetInput();
 	Output* pOut = pGrid->GetOutput();
-	if (this->pPlayer == NULL) {
+	if (this->pPlayer == NULL) { // if the station wasn't bought by another player
 		pGrid->PrintErrorMessage("Would you like to buy this station for "+ to_string(this->price) + "? [y\\n]");
 		string answer = pIn->GetSrting(pOut);
-		while (answer != "n" && answer != "y") answer = pIn->GetSrting(pOut);
+		while (answer != "n" && answer != "y") answer = pIn->GetSrting(pOut); // Loop until the user gives appropriate answer
 		if (answer == "y") {
 			if (pPlayer->GetWallet() >= this->price) {
 				int currentWallet = pPlayer->GetWallet();
