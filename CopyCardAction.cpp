@@ -29,7 +29,7 @@ void CopyCardAction::Execute()
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
 	ReadActionParameters();
-	pCard = pGrid->
+	//pCard = pGrid->
 	/*if (pCard == NULL)
 	{
 		pOut->PrintMessage("There is no card here!");

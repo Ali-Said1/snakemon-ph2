@@ -1,7 +1,7 @@
 #include "Card.h"
 
 
-Card::Card(const CellPosition & pos) : GameObject(pos) // sets the cell position of the GameObject
+Card::Card(const CellPosition& pos) : GameObject(pos) // sets the cell position of the GameObject
 {
 }
 
@@ -24,13 +24,26 @@ void Card::Draw(Output* pOut) const
 
 }
 
-void Card::ReadCardParameters(Grid * pGrid)
+void Card::ReadCardParameters(Grid* pGrid)
 {
 	// we should not make it pure virtual because some Cards doesn't have parameters
 	// and if we make it pure virtual, that will make those Cards abstract classes
 }
 
-void Card::Apply(Grid* pGrid, Player* pPlayer) 
+bool Card::TakesParameters() const
+{
+	// Default implementation: Cards that don't take parameters return false
+	return false;
+}
+
+void Card::EditParameters(Grid* pGrid, Input* pIn, Output* pOut)
+{
+	// Default implementation: Cards that don't take parameters do nothing
+	pOut->PrintMessage("This card does not support editing parameters.");
+}
+
+
+void Card::Apply(Grid* pGrid, Player* pPlayer)
 {
 	// As written below the "Roll Dice" action in the document ==> Check the Project Document
 	// "If a player reaches a card of any other type", the following message should be printed then wait mouse click

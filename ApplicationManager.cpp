@@ -6,6 +6,7 @@
 #include "CopyCardAction.h"
 #include "CutCardAction.h"
 #include "PasteCardAction.h"
+#include "EditCardAction.h"
 #include "DeleteGameObjectAction.h"
 #include "SaveGridAction.h"
 #include "OpenGridAction.h"
@@ -106,33 +107,36 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		///TODO: Add a case for EACH Action type in the Design mode or Play mode
 
-	//case ADD_SNAKE:
-	//	pAct = new AddSnakeAction(this);
-	//	break;
+	case ADD_SNAKE:
+		pAct = new AddSnakeAction(this);
+		break;
 
-	//case COPY_CARD:
-	//	pAct = new CopyCardAction(this);
-	//	break;
+	case COPY_CARD:
+		pAct = new CopyCardAction(this);
+		break;
 
-	//case CUT_CARD:
-	//	pAct = new CutCardAction(this);
-	//	break;
+	case CUT_CARD:
+		pAct = new CutCardAction(this);
+		break;
 
-	//case PASTE_CARD:
-	//	pAct = new PasteCardAction(this);
-	//	break;
+	case PASTE_CARD:
+		pAct = new PasteCardAction(this);
+		break;
+	case EDIT_CARD:
+		pAct = new EditCardAction(this);
+		break;
 
-	//case OPEN_GRID:
-	//	pAct = new OpenGridAction(this);
-	//	break;
+		//case OPEN_GRID:
+		//	pAct = new OpenGridAction(this);
+		//	break;
 
-	//case SAVE_GRID:
-	//	pAct = new SaveGridAction(this);
-	//	break;
+		//case SAVE_GRID:
+		//	pAct = new SaveGridAction(this);
+		//	break;
 
-	//case NEW_GAME:
-	//	pAct = new NewGameAction(this);
-	//	break;
+		//case NEW_GAME:
+		//	pAct = new NewGameAction(this);
+		//	break;
 
 	case STATUS:	// a click on the status bar ==> no action
 		return;

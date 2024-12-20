@@ -34,8 +34,8 @@ void AddCardAction::ReadActionParameters()
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
 	// 1- Get a Pointer to the Input / Output Interfaces
-	Output* pOut;
-	Input* pIn;
+	Output* pOut{};
+	Input* pIn{};
 	// 2- Read the "cardNumber" parameter and set its data member
 	do
 	{
@@ -98,18 +98,18 @@ void AddCardAction::Execute()
 	case 9:
 		pCard = new CardNine(cardPosition);
 		break;
-	case 10:
-		pCard = new CardTen(cardPosition);
-		break;
-	case 11:
-		pCard = new CardEleven(cardPosition);
-		break;
-	case 12:
-		pCard = new CardTwelve(cardPosition);
-		break;
-	case 13:
-		pCard = new CardThirteen(cardPosition);
-		// A- Add the remaining cases
+	//case 10:
+	//	pCard = new CardTen(cardPosition);
+	//	break;
+	//case 11:
+	//	pCard = new CardEleven(cardPosition);
+	//	break;
+	//case 12:
+	//	pCard = new CardTwelve(cardPosition);
+	//	break;
+	//case 13:
+	//	pCard = new CardThirteen(cardPosition);
+	//	// A- Add the remaining cases
 
 	}
 
