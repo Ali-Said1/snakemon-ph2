@@ -10,6 +10,11 @@ void CardSix::Apply(Grid* pGrid, Player* pPlayer) {
 	pPlayer->Move(pGrid, -pPlayer->GetJustRolledDiceNumber());
 }
 
+Card* CardSix::CopyCard(CellPosition& pos)
+{
+	return new CardSix(pos);
+}
+
 void CardSix::save(ofstream& output)
 {
 	Card::save(output);

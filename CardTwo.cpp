@@ -5,21 +5,17 @@ CardTwo::CardTwo(const CellPosition& Cell_Pos): Card(Cell_Pos)
 	cardNumber = 2;
 	AddedValue = -1;
 }
-
 void CardTwo::ReadCardParameters(Grid* pGrid)
 {
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
-
 	pOut->PrintMessage("Enter the value to be incremented");
 	AddedValue = pIn->GetInteger(pOut);
 	pOut->ClearStatusBar();
-	if (AddedValue < 0)
+	if (AddedValue <= 0)
 	{
-		int x, y;
-		pOut->PrintMessage("Invalid, Click to continue...");
-		pIn->GetPointClicked(x, y);
-		pOut->ClearStatusBar();
+		AddedValue = 0;
+		pGrid->PrintErrorMessage("Invalid, Click to continue...");
 	}
 }
 
@@ -29,12 +25,33 @@ bool CardTwo::UserInputValidation()
 	return false;
 }
 
+bool CardTwo::TakesParameters() const
+{
+	return true;
+}
+
 void CardTwo::Apply(Grid* pGrid, Player* pPlayer)
 {
 
 		Card::Apply(pGrid, pPlayer);
 		int newVal = pPlayer->GetWallet() + AddedValue;
 		pPlayer->SetWallet(newVal);
+}
+
+Card* CardTwo::CopyCard(CellPosition& pos)
+{
+	return new CardTwo(pos);
+}
+
+bool CardTwo::EditParameters(Grid* pGrid)
+{
+	int currVal = AddedValue;
+	ReadCardParameters(pGrid);
+	if (!AddedValue) {
+		AddedValue = currVal;
+		return false;
+	}
+	return true;
 }
 
 void CardTwo::save(ofstream& output) {

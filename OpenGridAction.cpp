@@ -40,11 +40,6 @@ void OpenGridAction::Execute() {
 	Grid* pGrid = pManager->GetGrid();
 	if (InputFile.fail()) {
 		pGrid->PrintErrorMessage("File doesn't exist or is corrupted.");
-		Input* pIn = pGrid->GetInput();
-		Output* pOut = pGrid->GetOutput();
-		int x, y;
-		pIn->GetPointClicked(x, y);
-		pOut->ClearStatusBar();
 		return;
 	}
 	pGrid->Clear();

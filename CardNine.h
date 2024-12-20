@@ -9,7 +9,11 @@ class CardNine : public Card
 public :
 	CardNine(const CellPosition& Cell_Pos);
 	virtual void ReadCardParameters(Grid* pGrid);
+	virtual bool UserInputValidation();
+	virtual bool TakesParameters() const;
 	virtual void Apply(Grid* pGrid, Player* pPlayer);
+	virtual Card* CopyCard(CellPosition& pos);
+	virtual bool EditParameters(Grid* pGrid);
 	virtual void save(ofstream& output);
 	virtual void load(ifstream& input);
 	virtual ~CardNine();

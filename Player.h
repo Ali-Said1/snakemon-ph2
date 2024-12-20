@@ -16,6 +16,7 @@ class Player
 	int turnCount;         // a counter that starts with 0, is incremented with each dice roll
 	                       // and reset again when reached 3
 	                       // it is used to indicate when to move and when to add to your wallet
+	bool prevented;
 	
 public:
 
@@ -39,7 +40,7 @@ public:
 	void Draw(Output* pOut) const;			// Draws the Player's Circle on its current cell
 
 	void ClearDrawing(Output* pOut) const;	// Clears the Player's Circle from its current cell
-
+	void PreventPlaying();
 	// ====== Game Functions ======
 
 	void Move(Grid * pGrid, int diceNumber);	// Moves the Player with the passed diceNumber 
@@ -48,6 +49,6 @@ public:
 	
 	void AppendPlayerInfo(string & playersInfo) const; // Appends player's info to the input string, 
 	                                                   // for example: P0(wallet, turnCount)
-
+	void ResetPlayer();
 };
 

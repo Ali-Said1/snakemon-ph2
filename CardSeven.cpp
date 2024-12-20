@@ -26,6 +26,11 @@ void CardSeven::Apply(Grid* pGrid, Player* pPlayer)
 	pGrid->PrintErrorMessage("Player " + to_string(player_num) + " Got an extra dice roll, Click to continue...");
 }
 
+Card* CardSeven::CopyCard(CellPosition& pos)
+{
+	return new CardSeven(pos);
+}
+
 void CardSeven::save(ofstream& output)
 {
 	Card::save(output);

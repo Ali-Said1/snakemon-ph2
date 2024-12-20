@@ -11,6 +11,7 @@
 class Cell;
 class GameObject;
 class Ladder;
+class Snake;
 class Card;
 class Player;
 
@@ -49,6 +50,7 @@ public:
 
     void UpdatePlayerCell(Player* player, const CellPosition& newPosition); // Update the player's pCell with the CellList's Cell pointer of the "newPosition",
     // Clears the player's circle from the previous cell
+    void ResetPlayers();
 // and  Draws it in the new cell
 
 // ========= Setters and Getters Functions =========
@@ -75,7 +77,7 @@ public:
 
     Player* GetCurrentPlayer() const;// Gets a Pointer to the Current Player                                    
     Ladder* GetNextLadder(const CellPosition& position);  // Gets a Pointer to the first Ladder after the passed "position"
-    //Snake * GetNextSnake(const CellPosition& position);  // Gets a Pointer to the first Snake after the passed "position"
+    Snake* GetNextSnake(const CellPosition& position);  // Gets a Pointer to the first Snake after the passed "position"
 
     // ========= User Interface Functions =========
 

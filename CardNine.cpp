@@ -15,13 +15,23 @@ void CardNine::ReadCardParameters(Grid* pGrid)
 	StoppingCell = pIn->GetCellClicked();
 	if (!StoppingCell.IsValidCell() || StoppingCell.GetCellNum() == this->GetPosition().GetCellNum())
 	{
-		int x, y;
-		pOut->PrintMessage("Invalid cell, Click to continue...");
-		pIn->GetPointClicked(x, y);
+		pGrid->PrintErrorMessage("Invalid cell, Click to continue...");
 
 	}
 	pOut->ClearStatusBar(); // clear for the next operation
 
+}
+
+bool CardNine::UserInputValidation()
+{
+	if (!StoppingCell.IsValidCell())
+		return false;
+	return true;
+}
+
+bool CardNine::TakesParameters() const
+{
+	return true;
 }
 
 void CardNine::Apply(Grid* pGrid, Player* pPlayer)
@@ -37,6 +47,22 @@ void CardNine::Apply(Grid* pGrid, Player* pPlayer)
 
 
 
+}
+
+Card* CardNine::CopyCard(CellPosition& pos)
+{
+	return new CardNine(pos);
+}
+
+bool CardNine::EditParameters(Grid* pGrid)
+{
+	CellPosition currPos = StoppingCell;
+	ReadCardParameters(pGrid);
+	if (!StoppingCell.IsValidCell() || StoppingCell.GetCellNum() == this->GetPosition().GetCellNum()) {
+		StoppingCell = currPos;
+		return false;
+	}
+	return true;
 }
 
 void CardNine::save(ofstream& output)

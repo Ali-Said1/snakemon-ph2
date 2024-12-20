@@ -33,8 +33,6 @@ void CardOne::ReadCardParameters(Grid * pGrid)
 		walletAmount = pIn->GetInteger(pOut);
 		if (walletAmount <= 0) {
 			pGrid->PrintErrorMessage("you entered invalid value, Click to continue...");
-			int x, y;
-			pIn->GetPointClicked(x, y);
 		}
 	// [ Note ]:
 	// In CardOne, the only parameter of CardOne is the "walletAmount" value to decrease from player
@@ -48,6 +46,27 @@ bool CardOne::UserInputValidation()
 {
 	if (walletAmount >= 0) return true;
 	return false;
+}
+
+bool CardOne::TakesParameters() const
+{
+	return true;
+}
+
+Card* CardOne::CopyCard(CellPosition& pos)
+{
+	return new CardOne(pos);
+}
+
+bool CardOne::EditParameters(Grid* pGrid)
+{
+	int currWallet = this->walletAmount;
+	ReadCardParameters(pGrid);
+	if (walletAmount <= 0) {
+		walletAmount = currWallet;
+		return false;
+	}
+	return true;
 }
 
 void CardOne::Apply(Grid* pGrid, Player* pPlayer)

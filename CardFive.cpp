@@ -9,6 +9,11 @@ void CardFive::Apply(Grid* pGrid, Player* pPlayer) {
 	pPlayer->Move(pGrid, pPlayer->GetJustRolledDiceNumber());
 }
 
+Card* CardFive::CopyCard(CellPosition& pos)
+{
+	return new CardFive(pos);
+}
+
 void CardFive::save(ofstream& output)
 {
 	Card::save(output);

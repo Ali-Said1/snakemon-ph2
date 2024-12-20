@@ -15,6 +15,7 @@ public:
 
 	virtual void Apply(Grid* pGrid, Player* pPlayer); // Applies the effect of CardFour on the passed Player.
 	// By Moving forward by the same number of steps that you just rolled and moved already.
+	virtual Card* CopyCard(CellPosition& pos);
 	void save(ofstream& output);
 	virtual ~CardFive(); // A Virtual Destructor
 };

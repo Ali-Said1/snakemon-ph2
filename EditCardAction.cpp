@@ -56,8 +56,12 @@ void EditCardAction::Execute()
 
     // Prompt the user to enter parameters specific to the card type
     pOut->PrintMessage("Enter the parameters for the card: ");
-    pCard->EditParameters(pGrid, pIn, pOut);
-    pOut->PrintMessage("Card edited successfully!");
+    bool Edited = pCard->EditParameters(pGrid);
+    if (Edited) {
+        pGrid->PrintErrorMessage("Card edited successfully! Click to continue...");
+        return;
+    }
+    pGrid->PrintErrorMessage("Couldn't edit card! Click to continue");
 }
 
 EditCardAction::~EditCardAction()

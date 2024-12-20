@@ -17,6 +17,12 @@ int Card::GetCardNumber()
 	return cardNumber;
 }
 
+Card* Card::CopyCard(CellPosition& pos)
+{
+	
+	return nullptr;
+}
+
 void Card::Draw(Output* pOut) const
 {
 
@@ -42,10 +48,11 @@ bool Card::TakesParameters() const
 	return false;
 }
 
-void Card::EditParameters(Grid* pGrid, Input* pIn, Output* pOut)
+bool Card::EditParameters(Grid* pGrid)
 {
 	// Default implementation: Cards that don't take parameters do nothing
-	pOut->PrintMessage("This card does not support editing parameters.");
+	pGrid->PrintErrorMessage("This card does not support editing parameters, Click to continue...");
+	return false;
 }
 
 
@@ -55,9 +62,6 @@ void Card::Apply(Grid* pGrid, Player* pPlayer)
 	// "If a player reaches a card of any other type", the following message should be printed then wait mouse click
 
 	pGrid->PrintErrorMessage("You have reached card " + to_string(cardNumber) + ". Click to continue ...");
-	Input* pIn = pGrid->GetInput();
-	int x, y;
-	pIn->GetPointClicked(x, y);
 }
 
 void Card::save(ofstream& output) {

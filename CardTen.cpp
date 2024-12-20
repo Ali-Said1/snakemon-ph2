@@ -13,6 +13,13 @@ void CardTen::ReadCardParameters(Grid* pGrid) {
 	fees = ReadCardFees(pGrid);
 }
 
+bool CardTen::UserInputValidation()
+{
+	if (price <= 0 || fees <= 0)
+		return false;
+	return true;
+}
+
 void CardTen::Apply(Grid* pGrid, Player* pPlayer) {
 	Card::Apply(pGrid, pPlayer);  // Output the default message
 	Input* pIn = pGrid->GetInput();
@@ -36,11 +43,30 @@ void CardTen::Apply(Grid* pGrid, Player* pPlayer) {
 		}
 	}
 	else {
-		pGrid->PrintErrorMessage("You landed on the station owned by player " + to_string(this->pPlayer->GetPlayerNumber()) + ", A fee of " + to_string(fees) + "is to be paid. [Click ...]");
-		int x, y;
-		pIn->GetPointClicked(x, y);
+		pGrid->PrintErrorMessage("You landed on the station owned by player " + to_string(this->pPlayer->GetPlayerNumber()) + ", A fee of " + to_string(fees) + "is to be paid, Click to continue...");
+		this->pPlayer->SetWallet(this->pPlayer->GetWallet() + fees);
+		pPlayer->SetWallet(pPlayer->GetWallet() - fees);
 		return;
 	}
+}
+
+Card* CardTen::CopyCard(CellPosition& pos)
+{
+	return new CardTen(pos);
+}
+
+bool CardTen::EditParameters(Grid* pGrid)
+{
+	int f = this->fees;
+	int p = this->price;
+	price = ReadCardPrice(pGrid);
+	fees = ReadCardFees(pGrid);
+	if (price == -1 || fees == -1) {
+		price = p;
+		fees = f;
+		return false;
+	}
+	return true;
 }
 
 void CardTen::save(ofstream& output) {
@@ -54,4 +80,9 @@ void CardTen::load(ifstream& input)
 	input >> p >> f;
 	this->price = p;
 	this->fees = f;
+}
+
+void CardTen::resetOwnerShip()
+{
+	pPlayer = NULL;
 }

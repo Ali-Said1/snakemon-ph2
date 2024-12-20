@@ -7,10 +7,11 @@ int MonopolyCards::ReadCardPrice(Grid* pGrid)
 	Input* pIn = pGrid->GetInput();
 	Output* pOut = pGrid->GetOutput();
 	int price = -1;
-	do {
-		pOut->PrintMessage("Input price of the station...");
-		price = pIn->GetInteger(pOut);
-	} while (price <= 0);
+	pOut->PrintMessage("Input price of the station...");
+	price = pIn->GetInteger(pOut);
+	if (price <= 0) {
+		pGrid->PrintErrorMessage("Invalid price value, Click to continue...");
+	}
 	return price;
 }
 
@@ -19,9 +20,16 @@ int MonopolyCards::ReadCardFees(Grid* pGrid)
 	Input* pIn = pGrid->GetInput();
 	Output* pOut = pGrid->GetOutput();
 	int fees = -1;
-	do {
-		pOut->PrintMessage("Input fees of the station...");
-		fees = pIn->GetInteger(pOut);
-	} while (fees <= 0);
+	pOut->PrintMessage("Input fees of the station...");
+	fees = pIn->GetInteger(pOut);
+	if (fees <= 0) {
+		pGrid->PrintErrorMessage("Invalid fees value, Click to continue...");
+	}
 	return fees;
+}
+
+
+bool MonopolyCards::TakesParameters() const
+{
+	return true;
 }

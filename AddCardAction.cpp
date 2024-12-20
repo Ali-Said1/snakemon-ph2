@@ -50,17 +50,15 @@ void AddCardAction::ReadActionParameters()
 		position = pIn->GetCellClicked();
 		bool IsItValid = position.IsValidCell();
 		if (!IsItValid) {
-			pOut->PrintMessage("Your Click Position is invalid, click to continue..");
-			int x, y;
-			pIn->GetPointClicked(x, y);
+			pGrid->PrintErrorMessage("Your Click Position is invalid, click to continue..");
+			cardNumber = -1;
+			return;
 		}
 		else cardPosition = position;
 	}
 	else {
 		cardNumber = -1;
-		pOut->PrintMessage("You Have entered an invalid card number, Click to continue..");
-		int x, y;
-		pIn->GetPointClicked(x, y);
+		pGrid->PrintErrorMessage("You Have entered an invalid card number, Click to continue..");
 	}
 
 
@@ -79,6 +77,7 @@ void AddCardAction::Execute()
 
 	// 1- The first line of any Action Execution is to read its parameter first
 	this->ReadActionParameters();
+	if (cardNumber == -1) return;
 	// 2- Switch case on cardNumber data member and create the appropriate card object type
 	Card* pCard = NULL; // will point to the card object type
 	if (cardPosition.IsValidCell()) {
@@ -122,8 +121,10 @@ void AddCardAction::Execute()
 			break;
 		case 13:
 			pCard = new CardThirteen(cardPosition);
+			break;
 			//	// A- Add the remaining cases
 		}
+
 		
 	}
 
@@ -138,6 +139,7 @@ void AddCardAction::Execute()
 	{
 		delete pCard;
 		pCard = NULL;
+		return;
 	}
 
 	if (pCard)

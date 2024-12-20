@@ -36,8 +36,7 @@ void RollDiceAction::Execute()
 
 		// 3- Get the "current" player from pGrid
 		Player* CurrentPlayer;
-		CurrentPlayer = pGrid->GetCurrentPlayer();   // remember to see if the player is prevented what will it do ?
-													 // we might use if (!currentPlayer->IsPrevented()){
+		CurrentPlayer = pGrid->GetCurrentPlayer();
 
 		pOut->PrintMessage("The Dice Value is " + to_string(diceNumber) + ", Click to continue...");
 		int x, y;

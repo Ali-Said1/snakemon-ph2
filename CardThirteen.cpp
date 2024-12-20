@@ -13,7 +13,12 @@ void CardThirteen::ReadCardParameters(Grid* pGrid) {
 	price = ReadCardPrice(pGrid); // Call the functions of the parent class (MonopolyCards)
 	fees = ReadCardFees(pGrid);
 }
-
+bool CardThirteen::UserInputValidation()
+{
+	if (price <= 0 || fees <= 0)
+		return false;
+	return true;
+}
 void CardThirteen::Apply(Grid* pGrid, Player* pPlayer) {
 	Card::Apply(pGrid, pPlayer);  // Output the default message
 	Input* pIn = pGrid->GetInput();
@@ -38,10 +43,29 @@ void CardThirteen::Apply(Grid* pGrid, Player* pPlayer) {
 	}
 	else {
 		pGrid->PrintErrorMessage("You landed on the station owned by player " + to_string(this->pPlayer->GetPlayerNumber()) + ", A fee of " + to_string(fees) + "is to be paid. [Click ...]");
-		int x, y;
-		pIn->GetPointClicked(x, y);
+		this->pPlayer->SetWallet(this->pPlayer->GetWallet() + fees);
+		pPlayer->SetWallet(pPlayer->GetWallet() - fees);
 		return;
 	}
+}
+
+Card* CardThirteen::CopyCard(CellPosition& pos)
+{
+	return new CardThirteen(pos);
+}
+
+bool CardThirteen::EditParameters(Grid* pGrid)
+{
+	int f = this->fees;
+	int p = this->price;
+	price = ReadCardPrice(pGrid);
+	fees = ReadCardFees(pGrid);
+	if (price == -1 || fees == -1) {
+		price = p;
+		fees = f;
+		return false;
+	}
+	return true;
 }
 
 void CardThirteen::save(ofstream& output)
@@ -56,4 +80,9 @@ void CardThirteen::load(ifstream& input)
 	input >> p >> f;
 	this->price = p;
 	this->fees = f;
+}
+
+void CardThirteen::resetOwnerShip()
+{
+	pPlayer = NULL;
 }

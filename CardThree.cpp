@@ -11,11 +11,6 @@ void CardThree::ReadCardParameters(Grid* pGrid)
 
 }
 
-bool CardThree::UserInputValidation()
-{
-	return true;
-}
-
 void CardThree::Apply(Grid* pGrid, Player* pPlayer)
 {
 	Card::Apply(pGrid, pPlayer);
@@ -31,6 +26,11 @@ void CardThree::Apply(Grid* pGrid, Player* pPlayer)
 		pGrid->UpdatePlayerCell(pPlayer, next_ladder->GetPosition());
 		next_ladder->Apply(pGrid, pPlayer);
 	}
+}
+
+Card* CardThree::CopyCard(CellPosition& pos)
+{
+	return new CardThree(pos);
 }
 
 void CardThree::save(ofstream& output) {

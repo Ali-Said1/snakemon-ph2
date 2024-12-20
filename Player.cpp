@@ -6,7 +6,7 @@ Player::Player(Cell * pCell, int playerNum) : stepCount(0), wallet(100), playerN
 {
 	this->pCell = pCell;
 	this->turnCount = 0;
-
+	this->prevented = false;
 	// Make all the needed initialization or validations
 	this->justRolledDiceNum = -1;
 }
@@ -69,10 +69,23 @@ void Player::ClearDrawing(Output* pOut) const
 	pOut->DrawPlayer(pCell->GetCellPosition(), playerNum, cellColor);
 }
 
+void Player::PreventPlaying()
+{
+	prevented = true;
+}
+
 // ====== Game Functions ======
 
 void Player::Move(Grid * pGrid, int diceNumber)
 {
+	if (prevented) {
+		prevented = false;
+		turnCount++;
+		if (turnCount == 3) turnCount = 0;
+		justRolledDiceNum = 0;
+		pGrid->PrintErrorMessage("You are denied from playing this turn. Click to continue...");
+		return;
+	}
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
 	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below
@@ -85,7 +98,8 @@ void Player::Move(Grid * pGrid, int diceNumber)
 	this->turnCount++;
 	// 2- Check the turnCount to know if the wallet recharge turn comes (recharge wallet instead of move)
 	//    If yes, recharge wallet and reset the turnCount and return from the function (do NOT move)
-	if (this->turnCount%3 == 0) {
+	if (this->turnCount == 3) {
+		turnCount = 0;
 		pGrid->PrintErrorMessage("It's Time to recharge the wallet for Player " + to_string(GetPlayerNumber()) + " . Click to continue...");
 		this->wallet += 10 * diceNumber;
 		pOut->PrintMessage("The Money of Player: " + to_string(playerNum) + " has been Increased By: " + to_string(diceNumber * 10));
@@ -117,4 +131,10 @@ void Player::AppendPlayerInfo(string & playersInfo) const
 	playersInfo += "P" + to_string(playerNum) + "(" ;
 	playersInfo += to_string(wallet) + ", ";
 	playersInfo += to_string(turnCount) + ")";
+}
+
+void Player::ResetPlayer()
+{
+	wallet = 100;
+	turnCount = 0;
 }

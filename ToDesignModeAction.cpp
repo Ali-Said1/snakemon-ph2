@@ -11,5 +11,6 @@ void ToDesignModeAction::ReadActionParameters() {};
 void ToDesignModeAction::Execute() {
 	Grid* pGrid = pManager->GetGrid();
 	Output* pOut = pGrid->GetOutput();
+	pGrid->ResetPlayers();
 	pOut->CreateDesignModeToolBar();
 }

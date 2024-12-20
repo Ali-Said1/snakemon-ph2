@@ -26,25 +26,20 @@ void AddSnakeAction::ReadActionParameters()
 		Start_Pos = CellPosition(-1, -1);
 
 	}
-	else
-	if (Start_Pos.HCell() != End_Pos.HCell()) {
+	else if (Start_Pos.HCell() != End_Pos.HCell()) {
 		pGrid->PrintErrorMessage("end cell and start cell are not in the same column...");
 		Start_Pos = CellPosition(-1, -1);
 	}
-	else
-	if (Start_Pos.VCell() > End_Pos.VCell()) {
+	else if (Start_Pos.VCell() > End_Pos.VCell()) {
 
 		pGrid->PrintErrorMessage("end cell cannot be larger than start cell ...");
 		Start_Pos = CellPosition(-1, -1);
 	}
-	else
-	if (Start_Pos.HCell() == End_Pos.HCell() && Start_Pos.VCell() == End_Pos.VCell())
+	else if (Start_Pos.HCell() == End_Pos.HCell() && Start_Pos.VCell() == End_Pos.VCell())
 	{
 		pGrid->PrintErrorMessage("Error: The starting cell and the ending cell are identical! Click to continue ...");
 		Start_Pos = CellPosition(-1, -1);
 	}
-	int x, y;
-	pIn->GetPointClicked(x, y);
 	pOut->ClearStatusBar();
 }
 

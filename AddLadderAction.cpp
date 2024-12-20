@@ -31,33 +31,31 @@ void AddLadderAction::ReadActionParameters()
 		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the final row! Click to continue ...");
 		startPos = CellPosition(-1, -1);
 	}
-	if (startPos.VCell() == 8 && startPos.HCell() == 0)
+	else if (startPos.VCell() == 8 && startPos.HCell() == 0)
 	{
 		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the first column of the final row! Click to continue ...");
 		startPos = CellPosition(-1, -1);
 	}
-	if (startPos.HCell() != endPos.HCell())
+	else if (startPos.HCell() != endPos.HCell())
 	{
 		pGrid->PrintErrorMessage("Error: The starting cell and the ending cell must be in the same column! Click to continue ...");
 		startPos = CellPosition(-1, -1);
 	}
 
-	if (startPos.VCell() < endPos.VCell())
+	else if (startPos.VCell() < endPos.VCell())
 	{
 
 		pGrid->PrintErrorMessage("Error: The ending cell must be above the starting cell! Click to continue ...");
 		startPos = CellPosition(-1, -1);
 	}
 
-	if (startPos.HCell() == endPos.HCell() && startPos.VCell() == endPos.VCell())
+	else if (startPos.HCell() == endPos.HCell() && startPos.VCell() == endPos.VCell())
 	{
 		pGrid->PrintErrorMessage("Error: The starting cell and the ending cell are identical! Click to continue ...");
 		startPos = CellPosition(-1, -1);
 	}
 
 	// Clear messages
-	int x, y;
-	pIn->GetPointClicked(x, y);
 	pOut->ClearStatusBar();
 }
 

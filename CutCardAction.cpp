@@ -2,6 +2,7 @@
 #include"Input.h"
 #include "Output.h"
 #include "Grid.h"
+#include "Card.h"
 
 CutCardAction::CutCardAction(ApplicationManager* pApp): Action(pApp)
 {
@@ -20,27 +21,21 @@ void CutCardAction::ReadActionParameters()
 	{
 		pGrid->PrintErrorMessage("Please click on a valid cell, Click to continue...");
 	}
-
-
-
 }
 
 void CutCardAction::Execute()
 {
-	/*Grid* pGrid = pManager->GetGrid();
-	Output* pOut = pGrid->GetOutput();
-	Input* pIn = pGrid->GetInput();
 	ReadActionParameters();
+	Grid* pGrid = pManager->GetGrid();
 	pCard = pGrid->GetCardFromPosition(CardPos);
-	if (pCard == NULL)
-	{
-		pOut->PrintMessage("There is no card here!");
+	if (pCard == NULL) {
+		pGrid->PrintErrorMessage("No card at clicked position, Click to continue...");
+		return;
 	}
-	else {
-		pGrid->SetClipboard(pCard->GetCopy(cardpos));
-		pGrid->RemoveObjectFromCell(cardpos);
-		pOut->PrintMessage("Card Cut!");
-	}*/
+
+	pGrid->SetClipboard(pCard->CopyCard(CardPos));
+	pGrid->RemoveObjectFromCell(CardPos);
+	pGrid->PrintErrorMessage("Card Cut succesfully, Click to continue...");
 }
 
 CutCardAction::~CutCardAction()

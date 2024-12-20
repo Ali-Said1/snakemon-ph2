@@ -134,9 +134,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new SaveGridAction(this);
 		break;
 
-		//case NEW_GAME:
-		//	pAct = new NewGameAction(this);
-		//	break;
+	case NEW_GAME:
+		pAct = new NewGameAction(this);
+		break;
 
 	case STATUS:	// a click on the status bar ==> no action
 		return;
