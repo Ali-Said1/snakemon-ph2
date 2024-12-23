@@ -20,6 +20,7 @@ void CardFour::Apply(Grid* pGrid, Player* pPlayer)
 	if (!next_snake)
 	{
 		pGrid->PrintErrorMessage("There is no snake ahead of you! Click to continue...");
+		return;
 	}
 	else {
 		pGrid->UpdatePlayerCell(pPlayer, next_snake->GetPosition());

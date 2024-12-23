@@ -6,6 +6,8 @@ private:
 	static int price;
 	static int fees;
 	static Player* pPlayer;
+	static bool saved;
+	static bool loaded;
 public:
 	CardEleven(const CellPosition& pos);
 	void ReadCardParameters(Grid* pGrid);
@@ -16,6 +18,8 @@ public:
 	virtual void save(ofstream& output);
 	virtual void load(ifstream& input);
 	static void resetOwnerShip();
+	static void setSaved(bool s);
+	static void setLoaded(bool l);
 	~CardEleven();
 };
 

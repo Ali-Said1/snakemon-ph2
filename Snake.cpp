@@ -20,9 +20,7 @@ void Snake::Apply(Grid* pGrid, Player* pPlayer)
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
 
-	pOut->PrintMessage("You have reached a snake. Click to continue ...");
-	pIn->GetCellClicked();
-	pOut->ClearStatusBar();
+	pGrid->PrintErrorMessage("You have reached a snake. Click to continue ...");
 
 	pGrid->UpdatePlayerCell(pPlayer, endCellPos);
 

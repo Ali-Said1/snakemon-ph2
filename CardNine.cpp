@@ -11,7 +11,7 @@ void CardNine::ReadCardParameters(Grid* pGrid)
 	Input* pIn = pGrid->GetInput();    // returns an input pointer
 	// we used an output pointer as the grid pointer has no accessibility on the cicked cell
 
-	pOut->PrintMessage("CardNine:: choose the ToMove cel...");
+	pOut->PrintMessage("CardNine: choose the move to cell! Click to continue...");
 	StoppingCell = pIn->GetCellClicked();
 	if (!StoppingCell.IsValidCell() || StoppingCell.GetCellNum() == this->GetPosition().GetCellNum())
 	{

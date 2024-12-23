@@ -40,6 +40,15 @@ int Player::GetTurnCount() const
 	return turnCount;
 }
 
+void Player::decrementTurnCount()
+{
+	if (this->turnCount == 0) {
+		this->turnCount = 2;
+		return;
+	}
+	this->turnCount--;
+}
+
 int Player::GetPlayerNumber() const
 {
 	return this->playerNum;
@@ -107,6 +116,7 @@ void Player::Move(Grid * pGrid, int diceNumber)
 	}
 	// 3- Set the justRolledDiceNum with the passed diceNumber
 	this->justRolledDiceNum = diceNumber;
+	if (this->wallet == 0) return;
 	// 4- Get the player current cell position, say "pos", and add to it the diceNumber (update the position)
 	//    Using the appropriate function of CellPosition class to update "pos"
 	CellPosition pos = pCell->GetCellPosition();
@@ -116,10 +126,8 @@ void Player::Move(Grid * pGrid, int diceNumber)
 	// 5- Use pGrid->UpdatePlayerCell() func to Update player's cell POINTER (pCell) with the cell in the passed position, "pos" (the updated one)
 	//    the importance of this function is that it Updates the pCell pointer of the player and Draws it in the new position
 	pGrid->UpdatePlayerCell(this, newPos);
-	// 6- Apply() the game object of the reached cell (if any)
-	if (pCell->GetGameObject() != NULL)
-		pCell->GetGameObject()->Apply(pGrid, this);
-	// 7- Check if the player reached the end cell of the whole game, and if yes, Set end game with true: pGrid->SetEndGame(true)
+
+	// 6- Check if the player reached the end cell of the whole game, and if yes, Set end game with true: pGrid->SetEndGame(true)
 	if (newCellNum == 99) {
 		pGrid->SetEndGame(true);
 		pGrid->PrintErrorMessage("The Game Has finished! Player : " + to_string(GetPlayerNumber()) + " Won!");

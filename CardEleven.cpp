@@ -6,6 +6,8 @@ CardEleven::~CardEleven() {}
 int CardEleven::fees = 0;
 int CardEleven::price = 0;
 Player* CardEleven::pPlayer = NULL;
+bool CardEleven::saved = false;
+bool CardEleven::loaded = false;
 
 void CardEleven::ReadCardParameters(Grid* pGrid) {
 	if (price != 0 && fees != 0) return;
@@ -69,17 +71,31 @@ bool CardEleven::EditParameters(Grid* pGrid)
 
 void CardEleven::save(ofstream& output) {
 	Card::save(output);
-	output << " " << price << " " << fees << endl;
+	if (!CardEleven::saved)
+		output << " " << price << " " << fees << endl;
+	else output << endl;
 }
 
 void CardEleven::load(ifstream& input) {
-	int p, f;
-	input >> p >> f;
-	this->price = p;
-	this->fees = f;
+	if (!CardEleven::loaded) {
+		int p, f;
+		input >> p >> f;
+		this->price = p;
+		this->fees = f;
+	}
 }
 
 void CardEleven::resetOwnerShip()
 {
 	pPlayer = NULL;
+}
+
+void CardEleven::setSaved(bool s)
+{
+	CardEleven::saved = s;
+}
+
+void CardEleven::setLoaded(bool l)
+{
+	CardEleven::loaded = l;
 }

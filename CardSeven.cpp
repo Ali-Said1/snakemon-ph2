@@ -22,7 +22,7 @@ void CardSeven::Apply(Grid* pGrid, Player* pPlayer)
 	int player_num = pPlayer->GetPlayerNumber();
 
 	for (int i = 0; i < 3; i++) pGrid->AdvanceCurrentPlayer();
-
+	pPlayer->decrementTurnCount();
 	pGrid->PrintErrorMessage("Player " + to_string(player_num) + " Got an extra dice roll, Click to continue...");
 }
 

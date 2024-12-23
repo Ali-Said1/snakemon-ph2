@@ -14,31 +14,34 @@ void AddSnakeAction::ReadActionParameters()
 	Grid* pGrid = pManager->GetGrid();
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
-	pOut->PrintMessage("click on the snake’s start cell...");
+	pOut->PrintMessage("Click on the snake’s start cell...");
 	Start_Pos = pIn->GetCellClicked();
-	pOut->PrintMessage("click on the snake’s end cell...");
+	pOut->PrintMessage("Click on the snake’s end cell...");
 	End_Pos = pIn->GetCellClicked();
 	
 	
 	if (Start_Pos.VCell() == 8 )
 	{
-		pGrid->PrintErrorMessage("Err:: The starting cell cannot be in the first row! Click to continue ...");
+		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the first row! Click to continue ...");
 		Start_Pos = CellPosition(-1, -1);
 
 	}
 	else if (Start_Pos.HCell() != End_Pos.HCell()) {
-		pGrid->PrintErrorMessage("end cell and start cell are not in the same column...");
+		pGrid->PrintErrorMessage("Error: The ending cell and the starting cell are not in the same column! Click to continue...");
 		Start_Pos = CellPosition(-1, -1);
 	}
 	else if (Start_Pos.VCell() > End_Pos.VCell()) {
 
-		pGrid->PrintErrorMessage("end cell cannot be larger than start cell ...");
+		pGrid->PrintErrorMessage("Error: The ending cell cannot be above the starting cell! Click to continue...");
 		Start_Pos = CellPosition(-1, -1);
 	}
 	else if (Start_Pos.HCell() == End_Pos.HCell() && Start_Pos.VCell() == End_Pos.VCell())
 	{
 		pGrid->PrintErrorMessage("Error: The starting cell and the ending cell are identical! Click to continue ...");
 		Start_Pos = CellPosition(-1, -1);
+	}
+	else if (Start_Pos.VCell() == 0 && End_Pos.HCell() == 10) {
+		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the final column of the final row! Click to continue ...");
 	}
 	pOut->ClearStatusBar();
 }
@@ -57,7 +60,7 @@ void AddSnakeAction::Execute()
 	if (!Check_Addition)
 	{
 	
-		pGrid->PrintErrorMessage("Error: Cell already has an object or Snake at current position is overlapping with another object! Click to continue ...");
+		pGrid->PrintErrorMessage("Error: Can't add Ladder here! Click to continue ...");
 		Input* pIn = pGrid->GetInput();
 		int x, y;
 		pIn->GetPointClicked(x ,y);

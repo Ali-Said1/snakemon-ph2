@@ -49,7 +49,7 @@ void AddCardAction::ReadActionParameters()
 		CellPosition position;
 		position = pIn->GetCellClicked();
 		bool IsItValid = position.IsValidCell();
-		if (!IsItValid) {
+		if (!IsItValid || (position.VCell() == 8 && position.HCell() == 0) || (position.VCell() == 0 && position.HCell() == 10)) {
 			pGrid->PrintErrorMessage("Your Click Position is invalid, click to continue..");
 			cardNumber = -1;
 			return;

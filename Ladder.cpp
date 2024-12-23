@@ -32,6 +32,10 @@ void Ladder::Apply(Grid* pGrid, Player* pPlayer)
 	//    Review the "pGrid" functions and decide which function can be used for that
 	pGrid->UpdatePlayerCell(pPlayer, endCellPos);
 
+	if (endCellPos.GetCellNumFromPosition(endCellPos) == 99) {
+		pGrid->SetEndGame(true);
+	}
+
 }
 
 CellPosition Ladder::GetEndPosition() const

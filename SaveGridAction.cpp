@@ -22,11 +22,6 @@ void SaveGridAction::Execute() {
 	if (outputFile.fail()) {
 		Grid* pGrid = pManager->GetGrid();
 		pGrid->PrintErrorMessage("Couldn't save the grid to file " + fileName + ".");
-		Input* pIn = pGrid->GetInput();
-		Output* pOut = pGrid->GetOutput();
-		int x, y;
-		pIn->GetPointClicked(x, y);
-		pOut->ClearStatusBar();
 		return;
 	}
 	Grid* pGrid = pManager->GetGrid();

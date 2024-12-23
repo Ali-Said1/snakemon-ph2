@@ -33,7 +33,7 @@ void AddLadderAction::ReadActionParameters()
 	}
 	else if (startPos.VCell() == 8 && startPos.HCell() == 0)
 	{
-		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the first column of the final row! Click to continue ...");
+		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the first column of the first row! Click to continue ...");
 		startPos = CellPosition(-1, -1);
 	}
 	else if (startPos.HCell() != endPos.HCell())
@@ -78,7 +78,8 @@ void AddLadderAction::Execute()
 	if (!added)
 	{
 		// Print an appropriate message
-		pGrid->PrintErrorMessage("Error: Cell already has an object or Ladder at current position is overlapping with another object! Click to continue ...");
+		pGrid->PrintErrorMessage("Error: Can't add Ladder here! Click to continue ...");
+		return;
 	}
 	Output* pOut = pGrid->GetOutput();
 	pLadder->Draw(pOut);

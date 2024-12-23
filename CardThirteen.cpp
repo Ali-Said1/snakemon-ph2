@@ -7,6 +7,8 @@ CardThirteen::~CardThirteen() {}
 int CardThirteen::fees = 0;
 int CardThirteen::price = 0;
 Player* CardThirteen::pPlayer = NULL;
+bool CardThirteen::saved = false;
+bool CardThirteen::loaded = false;
 
 void CardThirteen::ReadCardParameters(Grid* pGrid) {
 	if (price != 0 && fees != 0) return;
@@ -71,18 +73,32 @@ bool CardThirteen::EditParameters(Grid* pGrid)
 void CardThirteen::save(ofstream& output)
 {
 	Card::save(output);
-	output << " " << price << " " << fees << endl;
+	if (!this->saved)
+		output << " " << price << " " << fees << endl;
+	else output << endl;
 }
 
 void CardThirteen::load(ifstream& input)
 {
-	int p, f;
-	input >> p >> f;
-	this->price = p;
-	this->fees = f;
+	if (!CardThirteen::loaded) {
+		int p, f;
+		input >> p >> f;
+		this->price = p;
+		this->fees = f;
+	}
 }
 
 void CardThirteen::resetOwnerShip()
 {
 	pPlayer = NULL;
+}
+
+void CardThirteen::setSaved(bool s)
+{
+	CardThirteen::saved = s;
+}
+
+void CardThirteen::setLoaded(bool l)
+{
+	CardThirteen::loaded = l;
 }

@@ -7,7 +7,8 @@ CardSix::CardSix(const CellPosition& pos) : Card(pos) {
 
 void CardSix::Apply(Grid* pGrid, Player* pPlayer) {
 	Card::Apply(pGrid, pPlayer);
-	pPlayer->Move(pGrid, -pPlayer->GetJustRolledDiceNumber());
+	int currCellNum = position.GetCellNumFromPosition(position);
+	pGrid->UpdatePlayerCell(pPlayer, CellPosition::GetCellPositionFromNum(currCellNum - pPlayer->GetJustRolledDiceNumber()));
 }
 
 Card* CardSix::CopyCard(CellPosition& pos)

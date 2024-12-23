@@ -4,6 +4,10 @@
 #include "Ladder.h"
 #include "Snake.h"
 #include "Card.h"
+#include "CardTen.h"
+#include "CardEleven.h"
+#include "CardTwelve.h"
+#include "CardThirteen.h"
 #include "Player.h"
 #include <fstream>
 
@@ -113,6 +117,8 @@ void Grid::UpdatePlayerCell(Player *player, const CellPosition &newPosition)
 
 	// Draw the player's circle on the new cell position
 	player->Draw(pOut);
+	if (newCell->GetGameObject() != NULL)
+		newCell->GetGameObject()->Apply(this, player);
 }
 
 void Grid::ResetPlayers()
@@ -218,13 +224,33 @@ void Grid::SaveLadders(ofstream &outputfile)
 
 void Grid::SaveCards(ofstream &outputfile)
 {
+	bool ten_saved = false;
+	bool eleven_saved = false;
+	bool twelve_saved = false;
+	bool thirteen_saved = false;
 	for (int i = 0; i < NumVerticalCells; i++)
 		for (int j = 0; j < NumHorizontalCells; j++)
 			if (CellList[i][j]->HasCard())
 			{
-				Card *L = dynamic_cast<Card *>(CellList[i][j]->GetGameObject());
-				L->save(outputfile);
+				Card *C = dynamic_cast<Card *>(CellList[i][j]->GetGameObject());
+				C->save(outputfile);
+				if (dynamic_cast<CardTen*>(C)) {
+					CardTen::setSaved(true);
+				}
+				if (dynamic_cast<CardEleven*>(C)) {
+					CardEleven::setSaved(true);
+				}
+				if (dynamic_cast<CardTwelve*>(C)) {
+					CardTwelve::setSaved(true);
+				}
+				if (dynamic_cast<CardThirteen*>(C)) {
+					CardThirteen::setSaved(true);
+				}
 			}
+	CardTen::setSaved(false);
+	CardEleven::setSaved(false);
+	CardTwelve::setSaved(false);
+	CardThirteen::setSaved(false);
 }
 // ========= Other Getters =========
 
@@ -243,7 +269,7 @@ Ladder *Grid::GetNextLadder(const CellPosition &position)
 		{
 
 			/// TODO: Check if CellList[i][j] has a ladder, if yes return it
-			if (CellList[i][j]->HasLadder())
+			if (CellList[i][j]->HasLadder() != NULL)
 				return dynamic_cast<Ladder *>(CellList[i][j]->GetGameObject()); // Cast the GameObject pointer to ladder pointer to match return type
 		}
 		startH = 0; // because in the next above rows, we will search from the first left cell (hCell = 0) to the right
@@ -260,7 +286,7 @@ Snake *Grid::GetNextSnake(const CellPosition &position)
 		for (int j = startH; j < NumHorizontalCells; j++) // searching from startH and RIGHT
 		{
 
-			if (CellList[i][j]->HasSnake())
+			if (CellList[i][j]->HasSnake() != NULL)
 				return dynamic_cast<Snake *>(CellList[i][j]->GetGameObject()); // Cast the GameObject pointer to snake pointer to match return type
 		}
 		startH = 0; // because in the next above rows, we will search from the first left cell (hCell = 0) to the right

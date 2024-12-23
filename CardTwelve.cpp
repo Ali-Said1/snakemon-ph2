@@ -7,6 +7,8 @@ CardTwelve::~CardTwelve() {}
 int CardTwelve::fees = 0;
 int CardTwelve::price = 0;
 Player* CardTwelve::pPlayer = NULL;
+bool CardTwelve::saved = false;
+bool CardTwelve::loaded = false;
 
 void CardTwelve::ReadCardParameters(Grid* pGrid) {
 	if (price != 0 && fees != 0) return;
@@ -70,18 +72,32 @@ bool CardTwelve::EditParameters(Grid* pGrid)
 
 void CardTwelve::save(ofstream& output) {
 	Card::save(output);
-	output << " " << price << " " << fees << endl;
+	if(!this->saved)
+		output << " " << price << " " << fees << endl;
+	else output << endl;
 }
 
 void CardTwelve::load(ifstream& input)
 {
-	int p, f;
-	input >> p >> f;
-	this->price = p;
-	this->fees = f;
+	if (!CardTwelve::loaded) {
+		int p, f;
+		input >> p >> f;
+		this->price = p;
+		this->fees = f;
+	}
 }
 
 void CardTwelve::resetOwnerShip()
 {
 	pPlayer = NULL;
+}
+
+void CardTwelve::setSaved(bool s)
+{
+	CardTwelve::saved = s;
+}
+
+void CardTwelve::setLoaded(bool l)
+{
+	CardTwelve::loaded = l;
 }

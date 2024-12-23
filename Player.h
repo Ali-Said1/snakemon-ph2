@@ -31,7 +31,7 @@ public:
 	int GetWallet() const;			// a getter for the wallet
 
 	int GetTurnCount() const;		// A getter for the turnCount
-
+	void decrementTurnCount();
 	///TODO: You can add setters and getters for data members here (if needed)
 	int GetPlayerNumber() const;
 	int GetJustRolledDiceNumber() const;

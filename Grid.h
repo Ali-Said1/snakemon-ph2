@@ -73,6 +73,7 @@ public:
     void SaveSnakes(ofstream &outputfile);
     void SaveLadders(ofstream& outputfile);
     void SaveCards(ofstream& outputfile);
+    GameObject* GetGameObjectFromCell(CellPosition cellpos);
     // ========= Other Getters =========
 
     Player* GetCurrentPlayer() const;// Gets a Pointer to the Current Player                                    

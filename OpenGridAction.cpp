@@ -110,24 +110,32 @@ void OpenGridAction::Execute() {
 			c = new CardTen(CellPosition::GetCellPositionFromNum(cellNum));
 			c->load(InputFile);
 			pGrid->AddObjectToCell(c);
+			CardTen::setLoaded(true);
 			break;
 		case 11:
 			c = new CardEleven(CellPosition::GetCellPositionFromNum(cellNum));
 			c->load(InputFile);
 			pGrid->AddObjectToCell(c);
+			CardEleven::setLoaded(true);
 			break;
 		case 12:
 			c = new CardTwelve(CellPosition::GetCellPositionFromNum(cellNum));
 			c->load(InputFile);
 			pGrid->AddObjectToCell(c);
+			CardTwelve::setLoaded(true);
 			break;
 		case 13:
 			c = new CardThirteen(CellPosition::GetCellPositionFromNum(cellNum));
 			c->load(InputFile);
 			pGrid->AddObjectToCell(c);
+			CardThirteen::setLoaded(true);
 			break;
 		default:
 			pGrid->PrintErrorMessage("An entry in the file is corrupted..");
 		}
 	}
+	CardTen::setLoaded(false);
+	CardEleven::setLoaded(false);
+	CardTwelve::setLoaded(false);
+	CardThirteen::setLoaded(false);
 }
