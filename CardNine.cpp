@@ -40,7 +40,7 @@ void CardNine::Apply(Grid* pGrid, Player* pPlayer)
 	if (StoppingCell.IsValidCell() || !(StoppingCell.GetCellNum() == this->GetPosition().GetCellNum()))
 	{
 		int newposition = StoppingCell.GetCellNum() - (pPlayer->GetCell()->GetCellPosition().GetCellNum()); //calculating what cells u gotta move 
-
+		pPlayer->decrementTurnCount();
 		pPlayer->Move(pGrid, newposition);
 
 	}

@@ -21,4 +21,5 @@ void NewGameAction::Execute() {
 	CardEleven::resetOwnerShip();
 	CardTwelve::resetOwnerShip();
 	CardThirteen::resetOwnerShip();
+	pGrid->SetEndGame(false);
 }

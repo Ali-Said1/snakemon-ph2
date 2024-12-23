@@ -26,7 +26,7 @@ void ToPlayModeAction::Execute()
 	CardEleven::resetOwnerShip();
 	CardTwelve::resetOwnerShip();
 	CardThirteen::resetOwnerShip();
-
+	pGrid->SetEndGame(false);
 }
 
 ToPlayModeAction::~ToPlayModeAction()

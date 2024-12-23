@@ -28,13 +28,11 @@ void InputDiceValAction::ReadActionParameters()
 			DiceValue = InputDiceValue;
 			int x, y;
 			pGrid->PrintErrorMessage("Error: The dice Value you entered is not bewtween 1-6 ,Click to continue...");
-			pIn->GetPointClicked(x, y);
-			pOut->ClearStatusBar();
 		}
 	}
-	pOut->ClearStatusBar();
-
-
+	else {
+		pGrid->PrintErrorMessage("The Game has ended!");
+	}
 }
 
 void InputDiceValAction::Execute()
