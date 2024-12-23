@@ -9,6 +9,10 @@ Player::Player(Cell * pCell, int playerNum) : stepCount(0), wallet(100), playerN
 	this->prevented = false;
 	// Make all the needed initialization or validations
 	this->justRolledDiceNum = -1;
+	this->attacksDone = NOATTACK;
+	this->fire = 0;
+	this->poison = 0;
+	this->attacksDone = 0;
 }
 
 // ====== Setters and Getters ======
@@ -109,10 +113,34 @@ void Player::Move(Grid * pGrid, int diceNumber)
 	//    If yes, recharge wallet and reset the turnCount and return from the function (do NOT move)
 	if (this->turnCount == 3) {
 		turnCount = 0;
-		pGrid->PrintErrorMessage("It's Time to recharge the wallet for Player " + to_string(GetPlayerNumber()) + " . Click to continue...");
-		this->wallet += 10 * diceNumber;
-		pOut->PrintMessage("The Money of Player: " + to_string(playerNum) + " has been Increased By: " + to_string(diceNumber * 10));
-		return;
+		if (attacksDone < 2) {
+			Output* pOut = pGrid->GetOutput();
+			Input* pIn = pGrid->GetInput();
+			string prompt;
+			do {
+				pOut->PrintMessage("Do you wish to launch a special attack instead of recharging? y/n");
+				prompt = pIn->GetSrting(pOut);
+			} while (prompt != "y" && prompt != "n");
+			if (prompt == "y") {
+				pGrid->PrintErrorMessage("It's Time to recharge the wallet for Player " + to_string(GetPlayerNumber()) + " . Click to continue...");
+				this->wallet += 10 * diceNumber;
+				pGrid->PrintErrorMessage("The Money of Player: " + to_string(playerNum) + " has been Increased By: " + to_string(diceNumber * 10));
+				return;
+			}
+			else {
+				int attack;
+				do {
+					pGrid->PrintErrorMessage("Choose an attack [1] Ice [2] Fire [3] Poison [4] Lightinig.");
+					attack = pIn->GetInteger(pOut);
+				} while (attack < 1 || attack > 4 || doneAttack == attack);
+			}
+		}
+		else {
+			pGrid->PrintErrorMessage("It's Time to recharge the wallet for Player " + to_string(GetPlayerNumber()) + " . Click to continue...");
+			this->wallet += 10 * diceNumber;
+			pGrid->PrintErrorMessage("The Money of Player: " + to_string(playerNum) + " has been Increased By: " + to_string(diceNumber * 10));
+			return;
+		}
 	}
 	// 3- Set the justRolledDiceNum with the passed diceNumber
 	this->justRolledDiceNum = diceNumber;

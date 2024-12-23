@@ -17,7 +17,10 @@ class Player
 	                       // and reset again when reached 3
 	                       // it is used to indicate when to move and when to add to your wallet
 	bool prevented;
-	
+	enum { NOATTACK, ICE, FIRE, POISON, LIGHTING} doneAttack;
+	int fire;
+	int poison;
+	int attacksDone;
 public:
 
 	Player(Cell * pCell, int playerNum); // Constructor making any needed initializations
