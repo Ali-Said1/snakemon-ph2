@@ -10,6 +10,7 @@ int MonopolyCards::ReadCardPrice(Grid* pGrid)
 	pOut->PrintMessage("Input price of the station...");
 	price = pIn->GetInteger(pOut);
 	if (price <= 0) {
+		price = 0;
 		pGrid->PrintErrorMessage("Invalid price value, Click to continue...");
 	}
 	return price;
@@ -23,6 +24,7 @@ int MonopolyCards::ReadCardFees(Grid* pGrid)
 	pOut->PrintMessage("Input fees of the station...");
 	fees = pIn->GetInteger(pOut);
 	if (fees <= 0) {
+		fees = 0;
 		pGrid->PrintErrorMessage("Invalid fees value, Click to continue...");
 	}
 	return fees;

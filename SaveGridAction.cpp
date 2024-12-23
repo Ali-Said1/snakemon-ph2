@@ -18,6 +18,11 @@ void SaveGridAction::ReadActionParameters() {
 
 void SaveGridAction::Execute() {
 	ReadActionParameters();
+	if (fileName.length() == 0) {
+		Grid* pGrid = pManager->GetGrid();
+		pGrid->PrintErrorMessage("File name can't be empty.");
+		return;
+	}
 	ofstream outputFile(fileName + ".txt");
 	if (outputFile.fail()) {
 		Grid* pGrid = pManager->GetGrid();

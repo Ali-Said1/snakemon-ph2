@@ -26,7 +26,7 @@ void PasteCardAction::Execute()
 {
 	ReadActionParameters();
 	Grid* pGrid = pManager->GetGrid();
-
+	if (CardPosition.HCell() == -1) return;
 	if (!pGrid->GetClipboard()) {
 		pGrid->PrintErrorMessage("No card saved on clipboard, Click to continue...");
 		return;

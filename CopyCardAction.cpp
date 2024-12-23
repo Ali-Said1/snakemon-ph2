@@ -29,6 +29,7 @@ void CopyCardAction::Execute()
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
 	ReadActionParameters();
+	if (CardPos.HCell() == -1) return;
 	pCard = pGrid->GetCardFromPosition(CardPos);
 	if (pCard == NULL) {
 		pGrid->PrintErrorMessage("No card at clicked position, Click to continue...");

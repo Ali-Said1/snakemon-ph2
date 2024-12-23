@@ -16,17 +16,23 @@ void AddSnakeAction::ReadActionParameters()
 	Input* pIn = pGrid->GetInput();
 	pOut->PrintMessage("Click on the snake’s start cell...");
 	Start_Pos = pIn->GetCellClicked();
+	if (Start_Pos.VCell() == 8)
+	{
+		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the first row! Click to continue ...");
+		Start_Pos = CellPosition(-1, -1);
+		return;
+	}
+	else if (Start_Pos.VCell() == 0 && Start_Pos.HCell() == 10) {
+		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the final column of the final row! Click to continue ...");
+		Start_Pos = CellPosition(-1, -1);
+		return;
+	}
 	pOut->PrintMessage("Click on the snake’s end cell...");
 	End_Pos = pIn->GetCellClicked();
 	
 	
-	if (Start_Pos.VCell() == 8 )
-	{
-		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the first row! Click to continue ...");
-		Start_Pos = CellPosition(-1, -1);
 
-	}
-	else if (Start_Pos.HCell() != End_Pos.HCell()) {
+	if (Start_Pos.HCell() != End_Pos.HCell()) {
 		pGrid->PrintErrorMessage("Error: The ending cell and the starting cell are not in the same column! Click to continue...");
 		Start_Pos = CellPosition(-1, -1);
 	}
@@ -40,9 +46,7 @@ void AddSnakeAction::ReadActionParameters()
 		pGrid->PrintErrorMessage("Error: The starting cell and the ending cell are identical! Click to continue ...");
 		Start_Pos = CellPosition(-1, -1);
 	}
-	else if (Start_Pos.VCell() == 0 && End_Pos.HCell() == 10) {
-		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the final column of the final row! Click to continue ...");
-	}
+
 	pOut->ClearStatusBar();
 }
 
@@ -60,7 +64,7 @@ void AddSnakeAction::Execute()
 	if (!Check_Addition)
 	{
 	
-		pGrid->PrintErrorMessage("Error: Can't add Ladder here! Click to continue ...");
+		pGrid->PrintErrorMessage("Error: Can't add Snake here! Click to continue ...");
 		Input* pIn = pGrid->GetInput();
 		int x, y;
 		pIn->GetPointClicked(x ,y);

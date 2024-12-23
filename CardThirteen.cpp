@@ -13,7 +13,9 @@ bool CardThirteen::loaded = false;
 void CardThirteen::ReadCardParameters(Grid* pGrid) {
 	if (price != 0 && fees != 0) return;
 	price = ReadCardPrice(pGrid); // Call the functions of the parent class (MonopolyCards)
+	if (!price) return;
 	fees = ReadCardFees(pGrid);
+	if (!fees) { price = 0; return; }
 }
 bool CardThirteen::UserInputValidation()
 {

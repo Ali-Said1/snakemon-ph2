@@ -27,6 +27,7 @@ void CutCardAction::Execute()
 {
 	ReadActionParameters();
 	Grid* pGrid = pManager->GetGrid();
+	if (CardPos.HCell() == -1) return;
 	pCard = pGrid->GetCardFromPosition(CardPos);
 	if (pCard == NULL) {
 		pGrid->PrintErrorMessage("No card at clicked position, Click to continue...");

@@ -19,24 +19,27 @@ void AddLadderAction::ReadActionParameters()
 	// Read the startPos parameter
 	pOut->PrintMessage("New Ladder: Click on its Start Cell ...");
 	startPos = pIn->GetCellClicked();
-
+	if (startPos.VCell() == 0)
+	{
+		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the final row! Click to continue ...");
+		startPos = CellPosition(-1, -1);
+		return;
+	}
+	else if (startPos.VCell() == 8 && startPos.HCell() == 0)
+	{
+		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the first column of the first row! Click to continue ...");
+		startPos = CellPosition(-1, -1);
+		return;
+	}
 	// Read the endPos parameter
 	pOut->PrintMessage("New Ladder: Click on its End Cell ...");
 	endPos = pIn->GetCellClicked();
 
 	/// TODO: Make the needed validations on the read parameters
 
-	if (startPos.VCell() == 0)
-	{
-		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the final row! Click to continue ...");
-		startPos = CellPosition(-1, -1);
-	}
-	else if (startPos.VCell() == 8 && startPos.HCell() == 0)
-	{
-		pGrid->PrintErrorMessage("Error: The starting cell cannot be in the first column of the first row! Click to continue ...");
-		startPos = CellPosition(-1, -1);
-	}
-	else if (startPos.HCell() != endPos.HCell())
+
+
+	if (startPos.HCell() != endPos.HCell())
 	{
 		pGrid->PrintErrorMessage("Error: The starting cell and the ending cell must be in the same column! Click to continue ...");
 		startPos = CellPosition(-1, -1);

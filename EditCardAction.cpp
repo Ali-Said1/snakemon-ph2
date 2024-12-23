@@ -46,7 +46,7 @@ void EditCardAction::ReadActionParameters()
 void EditCardAction::Execute()
 {
     ReadActionParameters();
-
+    if (cardPos.HCell() == -1) return;
     if (!pCard) // If no valid card is selected, cancel the operation
         return;
 

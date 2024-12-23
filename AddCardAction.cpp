@@ -150,6 +150,7 @@ void AddCardAction::Execute()
 		if (!AdditionValidity)
 		{
 			pGrid->PrintErrorMessage("Error: This cell is already used for another object! click to continue...");
+			return;
 		}
 	}
 
