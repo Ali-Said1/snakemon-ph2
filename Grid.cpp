@@ -352,6 +352,32 @@ void Grid::PrintErrorMessage(string msg)
 	pOut->ClearStatusBar();
 }
 
+void Grid::launchAttack(int attacker, int pIdx, int attack)
+{
+	switch (attack) {
+	case 1:
+		PlayerList[pIdx]->PreventPlaying();
+		PrintErrorMessage("Player " + to_string(attacker) + " attacked player " + to_string(pIdx) + " with the Ice attack!");
+		break;
+	case 2:
+		PlayerList[pIdx]->addFire(3);
+		PrintErrorMessage("Player " + to_string(attacker) + " attacked player " + to_string(pIdx) + " with the Fire attack!");
+		break;
+	case 3:
+		PlayerList[pIdx]->addPoison(5);
+		PrintErrorMessage("Player " + to_string(attacker) + " attacked player " + to_string(pIdx) + " with the Poison attack!");
+		break;
+	case 4:
+		for (int i = 0; i < 4; i++) {
+			if (i != attacker) {
+				PlayerList[i]->SetWallet(PlayerList[i]->GetWallet() - 20);
+			}
+		}
+		PrintErrorMessage("Player " + to_string(attacker) + " launched the Lightining attack!");
+		break;
+	}
+}
+
 Grid::~Grid()
 {
 	delete pIn;

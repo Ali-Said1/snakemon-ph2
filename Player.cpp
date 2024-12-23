@@ -62,6 +62,16 @@ int Player::GetJustRolledDiceNumber() const {
 	return this->justRolledDiceNum;
 }
 
+void Player::addFire(int f)
+{
+	this->fire += f;
+}
+
+void Player::addPoison(int p)
+{
+	this->poison += p;
+}
+
 // ====== Drawing Functions ======
 
 void Player::Draw(Output* pOut) const
@@ -91,6 +101,14 @@ void Player::PreventPlaying()
 
 void Player::Move(Grid * pGrid, int diceNumber)
 {
+	if (fire) {
+		this->SetWallet(this->GetWallet() - 20);
+		fire--;
+	}
+	if (poison) {
+		diceNumber--;
+		poison--;
+	}
 	if (prevented) {
 		prevented = false;
 		turnCount++;
@@ -121,8 +139,8 @@ void Player::Move(Grid * pGrid, int diceNumber)
 				pOut->PrintMessage("Do you wish to launch a special attack instead of recharging? y/n");
 				prompt = pIn->GetSrting(pOut);
 			} while (prompt != "y" && prompt != "n");
-			if (prompt == "y") {
-				pGrid->PrintErrorMessage("It's Time to recharge the wallet for Player " + to_string(GetPlayerNumber()) + " . Click to continue...");
+			if (prompt == "n") {
+				pOut->PrintMessage("It's Time to recharge the wallet for Player " + to_string(GetPlayerNumber()) + " . Click to continue...");
 				this->wallet += 10 * diceNumber;
 				pGrid->PrintErrorMessage("The Money of Player: " + to_string(playerNum) + " has been Increased By: " + to_string(diceNumber * 10));
 				return;
@@ -130,9 +148,39 @@ void Player::Move(Grid * pGrid, int diceNumber)
 			else {
 				int attack;
 				do {
-					pGrid->PrintErrorMessage("Choose an attack [1] Ice [2] Fire [3] Poison [4] Lightinig.");
+					pOut->PrintMessage("Choose an attack [1] Ice [2] Fire [3] Poison [4] Lightining. You can't do the same attack twice! Click to Continue...");
 					attack = pIn->GetInteger(pOut);
 				} while (attack < 1 || attack > 4 || doneAttack == attack);
+				int player;
+				switch (attack) {
+				case ICE:
+					do {
+						pOut->PrintMessage("Choose a player to attack with Ice attack...");
+						player = pIn->GetInteger(pOut);
+					} while (player < 0 || player > 3 || player == this->GetPlayerNumber());
+					doneAttack = ICE;
+					break;
+				case FIRE:
+					do {
+						pOut->PrintMessage("Choose a player to attack with Fire attack...");
+						player = pIn->GetInteger(pOut);
+					} while (player < 0 || player > 3 || player == this->GetPlayerNumber());
+					doneAttack = FIRE;
+					break;
+				case POISON:
+					do {
+						pOut->PrintMessage("Choose a player to attack with Poison attack...");
+						player = pIn->GetInteger(pOut);
+					} while (player < 0 || player > 3 || player == this->GetPlayerNumber());
+					doneAttack = POISON;
+					break;
+				case LIGHTING:
+					player = -1;
+					doneAttack = LIGHTING;
+					break;
+				}
+				pGrid->launchAttack(this->GetPlayerNumber(), player, attack);
+				attacksDone++;
 			}
 		}
 		else {

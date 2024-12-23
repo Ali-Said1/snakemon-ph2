@@ -73,7 +73,6 @@ public:
     void SaveSnakes(ofstream &outputfile);
     void SaveLadders(ofstream& outputfile);
     void SaveCards(ofstream& outputfile);
-    GameObject* GetGameObjectFromCell(CellPosition cellpos);
     // ========= Other Getters =========
 
     Player* GetCurrentPlayer() const;// Gets a Pointer to the Current Player                                    
@@ -90,6 +89,6 @@ public:
 
     void PrintErrorMessage(string msg); // Prints an error message on statusbar, Waits for mouse click then clears statusbar
     // We added this function once here because it is used many times by other classes
-
+    void launchAttack(int attacker, int pIdx, int attack);
     ~Grid(); // A destructor for any needed deallcations
 };
