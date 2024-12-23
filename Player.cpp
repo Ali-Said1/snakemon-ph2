@@ -181,6 +181,7 @@ void Player::Move(Grid * pGrid, int diceNumber)
 				}
 				pGrid->launchAttack(this->GetPlayerNumber(), player, attack);
 				attacksDone++;
+				return;
 			}
 		}
 		else {
