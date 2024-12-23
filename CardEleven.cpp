@@ -1,14 +1,20 @@
 #include "CardEleven.h"
 #include <fstream>
 CardEleven::CardEleven(const CellPosition& pos) : MonopolyCards(pos) { cardNumber = 11; }
-CardEleven::~CardEleven() {}
+CardEleven::~CardEleven() {
+	CardEleven::count--;
+	if (!CardEleven::count) {
+		CardEleven::fees = 0;
+		CardEleven::price = 0;
+	}
+}
 
 int CardEleven::fees = 0;
 int CardEleven::price = 0;
 Player* CardEleven::pPlayer = NULL;
 bool CardEleven::saved = false;
 bool CardEleven::loaded = false;
-
+int CardEleven::count = 0;
 void CardEleven::ReadCardParameters(Grid* pGrid) {
 	if (price != 0 && fees != 0) return;
 	price = ReadCardPrice(pGrid); // Call the functions of the parent class (MonopolyCards)
@@ -20,6 +26,7 @@ bool CardEleven::UserInputValidation()
 {
 	if (price <= 0 || fees <= 0)
 		return false;
+	CardEleven::count++;
 	return true;
 }
 void CardEleven::Apply(Grid* pGrid, Player* pPlayer) {
@@ -27,7 +34,7 @@ void CardEleven::Apply(Grid* pGrid, Player* pPlayer) {
 	Input* pIn = pGrid->GetInput();
 	Output* pOut = pGrid->GetOutput();
 	if (this->pPlayer == NULL) { // if the station wasn't bought by another player
-		pGrid->PrintErrorMessage("Would you like to buy this station for " + to_string(this->price) + "? [y\\n]");
+		pOut->PrintMessage("Would you like to buy this station for " + to_string(this->price) + "? [y\\n]");
 		string answer = pIn->GetSrting(pOut);
 		while (answer != "n" && answer != "y") answer = pIn->GetSrting(pOut); // Loop until the user gives appropriate answer
 		if (answer == "y") {
@@ -45,7 +52,7 @@ void CardEleven::Apply(Grid* pGrid, Player* pPlayer) {
 		}
 	}
 	else {
-		pGrid->PrintErrorMessage("You landed on the station owned by player " + to_string(this->pPlayer->GetPlayerNumber()) + ", A fee of " + to_string(fees) + "is to be paid. [Click ...]");
+		pGrid->PrintErrorMessage("You landed on the station owned by player " + to_string(this->pPlayer->GetPlayerNumber()) + ", A fee of " + to_string(fees) + " is to be paid. Click to Continue...");
 		this->pPlayer->SetWallet(this->pPlayer->GetWallet() + fees);
 		pPlayer->SetWallet(pPlayer->GetWallet() - fees);
 		return;

@@ -27,9 +27,18 @@ void AddSnakeAction::ReadActionParameters()
 		Start_Pos = CellPosition(-1, -1);
 		return;
 	}
+	else if (Start_Pos.HCell() == -1) {
+		pGrid->PrintErrorMessage("Error: Invalid Location for the starting cell! Click to continue ...");
+		Start_Pos = CellPosition(-1, -1);
+		return;
+	}
 	pOut->PrintMessage("Click on the snake’s end cell...");
 	End_Pos = pIn->GetCellClicked();
-	
+	if (End_Pos.HCell() == -1) {
+		pGrid->PrintErrorMessage("Error: Invalid Location for the ending cell! Click to continue ...");
+		Start_Pos = CellPosition(-1, -1);
+		return;
+	}
 	
 
 	if (Start_Pos.HCell() != End_Pos.HCell()) {
@@ -53,8 +62,6 @@ void AddSnakeAction::ReadActionParameters()
 void AddSnakeAction::Execute()
 {
 	ReadActionParameters();
-	if (Start_Pos.HCell() == -1 || Start_Pos.VCell() == -1)
-		return;
 
 	Snake* pSnake = new Snake(Start_Pos, End_Pos);
 

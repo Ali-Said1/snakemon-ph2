@@ -31,10 +31,19 @@ void AddLadderAction::ReadActionParameters()
 		startPos = CellPosition(-1, -1);
 		return;
 	}
+	else if (startPos.HCell() == -1) {
+		pGrid->PrintErrorMessage("Error: Invalid Location for the starting cell! Click to continue ...");
+		startPos = CellPosition(-1, -1);
+		return;
+	}
 	// Read the endPos parameter
 	pOut->PrintMessage("New Ladder: Click on its End Cell ...");
 	endPos = pIn->GetCellClicked();
-
+	if (endPos.HCell() == -1) {
+		pGrid->PrintErrorMessage("Error: Invalid Location for the ending cell! Click to continue ...");
+		startPos = CellPosition(-1, -1);
+		return;
+	}
 	/// TODO: Make the needed validations on the read parameters
 
 

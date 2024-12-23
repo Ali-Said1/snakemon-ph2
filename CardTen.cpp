@@ -1,13 +1,20 @@
 #include "CardTen.h"
 #include <fstream>
 CardTen::CardTen(const CellPosition& pos) : MonopolyCards(pos) { cardNumber = 10; }
-CardTen::~CardTen() {}
+CardTen::~CardTen() {
+	CardTen::count--;
+	if (!CardTen::count) {
+		CardTen::fees = 0;
+		CardTen::price = 0;
+	}
+}
 
 int CardTen::fees = 0;
 int CardTen::price = 0;
 Player* CardTen::pPlayer = NULL;
 bool CardTen::saved = false;
 bool CardTen::loaded = false;
+int CardTen::count = 0;
 
 void CardTen::ReadCardParameters(Grid* pGrid) {
 	if (price != 0 && fees != 0) return;
@@ -21,6 +28,7 @@ bool CardTen::UserInputValidation()
 {
 	if (price <= 0 || fees <= 0)
 		return false;
+	CardTen::count++;
 	return true;
 }
 
@@ -29,7 +37,7 @@ void CardTen::Apply(Grid* pGrid, Player* pPlayer) {
 	Input* pIn = pGrid->GetInput();
 	Output* pOut = pGrid->GetOutput();
 	if (this->pPlayer == NULL) { // if the station wasn't bought by another player
-		pGrid->PrintErrorMessage("Would you like to buy this station for "+ to_string(this->price) + "? [y\\n]");
+		pOut->PrintMessage("Would you like to buy this station for " + to_string(this->price) + "? [y\\n]");
 		string answer = pIn->GetSrting(pOut);
 		while (answer != "n" && answer != "y") answer = pIn->GetSrting(pOut); // Loop until the user gives appropriate answer
 		if (answer == "y") {
@@ -47,7 +55,7 @@ void CardTen::Apply(Grid* pGrid, Player* pPlayer) {
 		}
 	}
 	else {
-		pGrid->PrintErrorMessage("You landed on the station owned by player " + to_string(this->pPlayer->GetPlayerNumber()) + ", A fee of " + to_string(fees) + "is to be paid, Click to continue...");
+		pGrid->PrintErrorMessage("You landed on the station owned by player " + to_string(this->pPlayer->GetPlayerNumber()) + ", A fee of " + to_string(fees) + " is to be paid. Click to Continue...");
 		this->pPlayer->SetWallet(this->pPlayer->GetWallet() + fees);
 		pPlayer->SetWallet(pPlayer->GetWallet() - fees);
 		return;

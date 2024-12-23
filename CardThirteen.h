@@ -8,6 +8,7 @@ private:
 	static Player* pPlayer;
 	static bool saved;
 	static bool loaded;
+	static int count;
 public:
 	CardThirteen(const CellPosition& pos);
 	void ReadCardParameters(Grid* pGrid);

@@ -2,13 +2,20 @@
 #include <fstream>
 
 CardTwelve::CardTwelve(const CellPosition& pos) : MonopolyCards(pos) { cardNumber = 12; }
-CardTwelve::~CardTwelve() {}
+CardTwelve::~CardTwelve() {
+	CardTwelve::count--;
+	if (!CardTwelve::count) {
+		CardTwelve::fees = 0;
+		CardTwelve::price = 0;
+	}
+}
 
 int CardTwelve::fees = 0;
 int CardTwelve::price = 0;
 Player* CardTwelve::pPlayer = NULL;
 bool CardTwelve::saved = false;
 bool CardTwelve::loaded = false;
+int CardTwelve::count = 0;
 
 void CardTwelve::ReadCardParameters(Grid* pGrid) {
 	if (price != 0 && fees != 0) return;
@@ -21,6 +28,7 @@ bool CardTwelve::UserInputValidation()
 {
 	if (price <= 0 || fees <= 0)
 		return false;
+	CardTwelve::count++;
 	return true;
 }
 void CardTwelve::Apply(Grid* pGrid, Player* pPlayer) {
@@ -28,7 +36,7 @@ void CardTwelve::Apply(Grid* pGrid, Player* pPlayer) {
 	Input* pIn = pGrid->GetInput();
 	Output* pOut = pGrid->GetOutput();
 	if (this->pPlayer == NULL) { // if the station wasn't bought by another player
-		pGrid->PrintErrorMessage("Would you like to buy this station for " + to_string(this->price) + "? [y\\n]");
+		pOut->PrintMessage("Would you like to buy this station for " + to_string(this->price) + "? [y\\n]");
 		string answer = pIn->GetSrting(pOut);
 		while (answer != "n" && answer != "y") answer = pIn->GetSrting(pOut); // Loop until the user gives appropriate answer
 		if (answer == "y") {
@@ -46,7 +54,7 @@ void CardTwelve::Apply(Grid* pGrid, Player* pPlayer) {
 		}
 	}
 	else {
-		pGrid->PrintErrorMessage("You landed on the station owned by player " + to_string(this->pPlayer->GetPlayerNumber()) + ", A fee of " + to_string(fees) + "is to be paid. [Click ...]");
+		pGrid->PrintErrorMessage("You landed on the station owned by player " + to_string(this->pPlayer->GetPlayerNumber()) + ", A fee of " + to_string(fees) + " is to be paid. Click to Continue...");
 		this->pPlayer->SetWallet(this->pPlayer->GetWallet() + fees);
 		pPlayer->SetWallet(pPlayer->GetWallet() - fees);
 		return;

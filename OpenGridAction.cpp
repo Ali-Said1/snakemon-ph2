@@ -36,6 +36,11 @@ void OpenGridAction::ReadActionParameters() {
 
 void OpenGridAction::Execute() {
 	ReadActionParameters();
+	if (fileName.length() == 0) {
+		Grid* pGrid = pManager->GetGrid();
+		pGrid->PrintErrorMessage("File name can't be empty.");
+		return;
+	}
 	ifstream InputFile(fileName + ".txt");
 	Grid* pGrid = pManager->GetGrid();
 	if (InputFile.fail()) {
